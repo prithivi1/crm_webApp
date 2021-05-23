@@ -1,6 +1,7 @@
 package com.myApp.Entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -16,7 +17,6 @@ public class CustomerEntity implements Serializable {
 	private String email;
 	private String address;
 	private Long mobile;
-
 	
 	public int getCustomerId() {
 		return customerId;
@@ -62,7 +62,7 @@ public class CustomerEntity implements Serializable {
 		this.address = address;
 	}
 
-	public void setMobile(long mobile) {
+	public void setMobile(Long mobile) {
 		this.mobile = mobile;
 	}
 

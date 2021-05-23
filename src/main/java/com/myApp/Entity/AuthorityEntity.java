@@ -1,19 +1,23 @@
 package com.myApp.Entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.ForeignKey;
 
 @Entity
 @Table(name = "authority")
 public class AuthorityEntity {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long id;
 	private String username;
+	@NotNull
 	private String role = "user";
-	private boolean enable = true;
 	
 	public String getUsername() {
 		
@@ -24,10 +28,6 @@ public class AuthorityEntity {
 		return role;
 	}
 	
-	public boolean isEnable() {
-		return enable;
-	}
-	
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -36,7 +36,5 @@ public class AuthorityEntity {
 		this.role = role;
 	}
 	
-	public void setEnable(boolean enable) {
-		this.enable = enable;
-	}
+	
 }

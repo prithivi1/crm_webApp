@@ -1,5 +1,6 @@
 package com.myApp.DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -7,6 +8,7 @@ import javax.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory; 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 
 import com.myApp.Entity.AuthorityEntity;
@@ -26,7 +28,7 @@ public class CustomerDaoImpl implements CustomerDAO {
 			AuthorityEntity authorityEntity = new AuthorityEntity();
 			authorityEntity.setUsername(customer.getUsername());
 			
-			sessionFactory.getCurrentSession().save(customer);
+			sessionFactory.getCurrentSession().saveOrUpdate(customer);
 			sessionFactory.getCurrentSession().save(authorityEntity);
 		}
 		catch (Exception e)
@@ -49,4 +51,5 @@ public class CustomerDaoImpl implements CustomerDAO {
 		}
 		return list.get(0);
 	}
+
 }

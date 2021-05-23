@@ -1,6 +1,6 @@
 package com.myApp.config;
 
-import java.util.Properties; 
+import java.util.Properties;   
 
 import javax.sql.DataSource;
 
@@ -14,13 +14,15 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan("com.myApp")
-public class AppConfig {
+public class AppConfig implements WebMvcConfigurer{
 	
 	@Autowired
     private Environment environment;
@@ -59,7 +61,7 @@ public class AppConfig {
     
     private Properties hibernateProperties() {
         Properties properties = new Properties();
-        properties.put("hbm2ddl.auto", "create");
+        properties.put("hbm2ddl.auto", "update");
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         properties.put("hibernate.show_sql", "true");
         return properties;        
@@ -72,5 +74,4 @@ public class AppConfig {
        txManager.setSessionFactory(s);
        return txManager;
     }
-    
 }

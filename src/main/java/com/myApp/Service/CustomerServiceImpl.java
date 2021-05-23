@@ -42,4 +42,5 @@ public class CustomerServiceImpl implements CustomerService {
 	{
 		return password.equals(confirmPassword);
 	}
+
 }
