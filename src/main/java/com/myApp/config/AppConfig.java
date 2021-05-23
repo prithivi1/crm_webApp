@@ -24,14 +24,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan("com.myApp")
 public class AppConfig implements WebMvcConfigurer{
 	
-	@Autowired
-    private Environment environment;
-	
 	@Bean	
 	public InternalResourceViewResolver viewResolver()
 	{
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		viewResolver.setPrefix("WEB-INF/views/");
+		viewResolver.setPrefix("/WEB-INF/views/");
 		viewResolver.setSuffix(".jsp"); 
 		
 		return viewResolver;
@@ -73,5 +70,9 @@ public class AppConfig implements WebMvcConfigurer{
        HibernateTransactionManager txManager = new HibernateTransactionManager();
        txManager.setSessionFactory(s);
        return txManager;
+    }
+    
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    	registry.addResourceHandler("/URLToReach/**").addResourceLocations("/resources/");
     }
 }

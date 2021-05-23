@@ -1,6 +1,6 @@
 package com.myApp.controllers;
 
-import java.util.List;
+import java.util.List;   
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.security.*;
+import org.springframework.security.authentication.AuthenticationTrustResolver;
 
 import com.myApp.DTO.CustomerDTO;
 import com.myApp.Service.CustomerService;
@@ -31,17 +33,18 @@ public class AppController {
 	@Autowired
 	private CustomerService customerService;
 	
-	@ResponseBody
-	@RequestMapping("/home")
-	public String getRegisterPage()
-	{
-		return "welcome";
-	}	
-	
+	@Autowired
+    AuthenticationTrustResolver authenticationTrustResolver;
+
 	@GetMapping("/login")
 	public String getLoginPage()
 	{
-		return "login";
+		if(isCurrentAuthenticationAnonymous())
+		{
+			return "login";
+		}
+		
+		return "redirect:/logout";
 	}
 	
 	@GetMapping("/signUp")
@@ -53,11 +56,17 @@ public class AppController {
 	@PostMapping("/register")
 	public String registerUser(@Valid @ModelAttribute("customer") CustomerDTO customerDTO,BindingResult result)
 	{
-		if(result.hasErrors() || !customerService.registerNewCustomer(customerDTO))
+		if(result.hasErrors())
 		{
 			return "/signUp";
 		}
-		return "redirect:login";
+		
+		if(!customerService.registerNewCustomer(customerDTO))
+		{
+			return "redirect:/signUp?error";
+		}
+		
+		return "redirect:/login?register_success";
 	}
 	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
@@ -69,4 +78,9 @@ public class AppController {
         return "redirect:/login?logout";
     }
 	
+	
+	private boolean isCurrentAuthenticationAnonymous() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authenticationTrustResolver.isAnonymous(authentication);
+    }
 }
