@@ -1,17 +1,10 @@
-package com.myApp.Entity;
+package com.myApp.DTO;
 
-import java.io.Serializable; 
-import java.util.List;
+import javax.persistence.Id;
 
-import javax.persistence.*;
+public class CustomerProfileDTO {
 
-
-@Entity
-@Table(name = "customers")
-public class CustomerEntity implements Serializable {
-	
 	private int customerId;
-	@Id
 	private String username;
 	private String companyName;
 	private String password;
@@ -45,6 +38,19 @@ public class CustomerEntity implements Serializable {
 		return mobile;
 	}
 	
+	public String getCompanyName() {
+		return companyName;
+	}
+	public String getCity() {
+		return city;
+	}
+	public String getState() {
+		return state;
+	}
+	public String getWebsite() {
+		return website;
+	}
+	
 
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
@@ -69,21 +75,7 @@ public class CustomerEntity implements Serializable {
 	public void setMobile(Long mobile) {
 		this.mobile = mobile;
 	}
-	
-	
-	
-	public String getCompanyName() {
-		return companyName;
-	}
-	public String getCity() {
-		return city;
-	}
-	public String getState() {
-		return state;
-	}
-	public String getWebsite() {
-		return website;
-	}
+
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
@@ -98,6 +90,4 @@ public class CustomerEntity implements Serializable {
 	}
 	
 	
-	
-
 }

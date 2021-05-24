@@ -4,7 +4,7 @@ import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-public class CustomerDTO {
+public class CustomerRegisterDTO {
 	
 	@NotBlank(message = "please enter username")
 	private String username;

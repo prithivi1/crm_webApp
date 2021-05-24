@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.security.*;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 
-import com.myApp.DTO.CustomerDTO;
+import com.myApp.DTO.CustomerRegisterDTO;
 import com.myApp.Service.CustomerService;
 
 @Controller
@@ -35,7 +35,7 @@ public class AppController {
 	
 	@Autowired
     AuthenticationTrustResolver authenticationTrustResolver;
-
+	
 	@GetMapping("/login")
 	public String getLoginPage()
 	{
@@ -48,20 +48,20 @@ public class AppController {
 	}
 	
 	@GetMapping("/signUp")
-	public String getSignUpPage(@ModelAttribute("customer") CustomerDTO customerDTO)
+	public String getSignUpPage(@ModelAttribute("customer") CustomerRegisterDTO customerRegisterDTO)
 	{
 		return "signUp";
 	}
 	
 	@PostMapping("/register")
-	public String registerUser(@Valid @ModelAttribute("customer") CustomerDTO customerDTO,BindingResult result)
+	public String registerUser(@Valid @ModelAttribute("customer") CustomerRegisterDTO customerRegisterDTO,BindingResult result)
 	{
 		if(result.hasErrors())
 		{
 			return "/signUp";
 		}
 		
-		if(!customerService.registerNewCustomer(customerDTO))
+		if(!customerService.registerNewCustomer(customerRegisterDTO))
 		{
 			return "redirect:/signUp?error";
 		}

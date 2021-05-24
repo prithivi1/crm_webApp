@@ -1,7 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"  isELIgnored="false" %>
+    pageEncoding="ISO-8859-1" isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,7 +23,7 @@
 			width: 100%;
 			display: grid;
 			grid-template-columns: 2.5fr 2.5fr;
-			/*background-color: #ffdb4d;*/
+			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 		}
 
 		.header a{
@@ -35,10 +35,11 @@
 		.content{
 			display: grid;
 			grid-template-columns: 2fr 2.5fr;
+			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 		}
 
 		.register-form{
-			margin-top:-40px;
+			margin-top:-30px;
 			padding: 50px;
 		}
 
