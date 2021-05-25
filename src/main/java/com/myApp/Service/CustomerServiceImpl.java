@@ -30,6 +30,7 @@ public class CustomerServiceImpl implements CustomerService {
 	{
 		if(checkPasswordMatch(customer.getPassword(), customer.getConfirm_password()) && checkIfExist(customer.getUsername()))
 		{
+			System.out.println("REGISTER SERVICE");
 			CustomerEntity customerEntity = new CustomerEntity();
 			customerEntity.setUsername(customer.getUsername());
 			customerEntity.setEmail(customer.getEmail());

@@ -14,7 +14,7 @@
 	<style type="text/css">
 		body{
 			margin: 0;
-			padding: 0;
+			padding: 10px;
 			font-family: 'Raleway', sans-serif;
 			background-color:  #f2f2f2;
 		}
@@ -23,6 +23,7 @@
 			width: 100%;
 			display: grid;
 			grid-template-columns: 2.5fr 2.5fr;
+			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 			/*background-color: #ffdb4d;*/
 		}
 
@@ -35,6 +36,8 @@
 		.content{
 			display: grid;
 			grid-template-columns: 2fr 2.5fr;
+			margin-top:30px;
+			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 		}
 
 		.register-form{

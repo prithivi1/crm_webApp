@@ -2,7 +2,6 @@ C:\Users\hp\workspace\myApp\src\main\java\com\myApp\DAO\UserDAOImpl.java
 C:\Users\hp\workspace\myApp\src\main\java\com\myApp\config\SecurityInitializer.java
 C:\Users\hp\workspace\myApp\src\main\java\com\myApp\Service\UserService.java
 C:\Users\hp\workspace\myApp\src\main\java\com\myApp\Service\UserServiceImpl.java
-C:\Users\hp\workspace\myApp\src\main\java\com\myApp\DTO\CustomerDTO.java
 C:\Users\hp\workspace\myApp\src\main\java\com\myApp\DAO\CustomerDAO.java
 C:\Users\hp\workspace\myApp\src\main\java\com\myApp\config\CustomSuccessHandler.java
 C:\Users\hp\workspace\myApp\src\main\java\com\myApp\controllers\AppController.java
@@ -18,3 +17,5 @@ C:\Users\hp\workspace\myApp\src\main\java\com\myApp\Entity\AuthorityEntity.java
 C:\Users\hp\workspace\myApp\src\main\java\com\myApp\config\AppConfig.java
 C:\Users\hp\workspace\myApp\src\main\java\com\myApp\config\CustomerUserDetailService.java
 C:\Users\hp\workspace\myApp\src\main\java\com\myApp\Service\CustomerServiceImpl.java
+C:\Users\hp\workspace\myApp\src\main\java\com\myApp\DTO\CustomerRegisterDTO.java
+C:\Users\hp\workspace\myApp\src\main\java\com\myApp\DTO\CustomerProfileDTO.java

@@ -13,95 +13,101 @@
     
     
 	<style type="text/css">
-	  body {
-		overflow:scroll;
-        font-family: 'Raleway', sans-serif;
-        background-color: #f2f2f2;
-      }
-      
-      .header{
+		
+		body{
+			margin: 0;
+			padding: 5px;
+			font-family: 'Raleway', sans-serif;
+		}
+
+		.main{
 			display: grid;
-			grid-template-columns: 2fr 2.5fr;
-			background: white;
+			grid-template-columns: 0.6fr 4fr;
+			grid-column-gap: 10px;
+		}
+
+		.navbar{
+			background-color: blue;
+			height: 100%;
+			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px
+		}
+
+		.navbar li{
+			list-style: none;
+			padding-bottom: 30px;
+		}
+
+		.navbar a{
+			color: white;
+			text-decoration: none;
+		}
+
+		.navbar a:hover{
+			color: black;
+		}
+
+		.header{
+			display: grid;
+			grid-template-columns: 2.5fr 2.5fr;
+			height:50px;
 			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 		}
 
-		.header .tray{
+		.tray{
 			padding: 3%;
-			float:right;
+			margin-left: 80px;
 		}
 
 		.tray a{
 			padding: 20px;
 		}
 
-	
-	  .container .view-table{
-	  	padding: 20px;
-	  }
-	  
-	  .content{
-	  		margin-top:20px;
-	  		display: grid;
+		.split{
+			margin-top: -10px;
+			display: grid;
 			grid-template-columns: 1fr 4fr;
-			grid-column-gap: 20px;
-	  }
-	  
-	  .sidenav {
-	      background: #eee;
-		  overflow-x: hidden;
-		  padding: 8px 10px;
-		  background-color: white;
-		  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 		}
-		
-		.sidenav a {
-		  padding: 6px 8px 6px 16px;
-		  text-decoration: none;
-		  font-size: 20px;
-		  color: #2196F3;
-		  display: block;
+
+		.options{
+			background-color: grey;
 		}
-		
-		.sidenav a:hover {
-		  color: #064579;
+
+		.options li{
+			list-style: none;
+			padding-bottom: 30px;
 		}
-			  
-	  
-	  .customer-details{
-	  	background-color: white;
-	  	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-	  }
-	  
-	  .button {
-		  background-color: #4CAF50;
-		  border: none;
-		  color: white;
-		  padding: 15px 32px;
-		  text-align: center;
-		  text-decoration: none;
-		  display: inline-block;
-		  font-size: 16px;
-		  margin: 4px 20px;
-		  cursor: pointer;
-		  margin-top: 20px;
+
+		.options a{
+			color: white;
+			text-decoration: none;
 		}
-	  
+
+		.options a:hover{
+			color: black;
+		}
+
+
+		.profile{
+			width: 90%;
+			height: 55ch;
+			/*background-color: yellow;*/
+		}
 	  
 	  table {
-          font-family: arial, sans-serif;
           border-collapse: collapse;
           width: 100%;
+          margin-left:20px;
           outline: none;
           border: none;
-          border-top-left-radius:30px;
-          border-top-right-radius:30px;
+          font-family: 'Raleway', sans-serif;
         }
 
         th {
           text-align: center;
           padding: 8px;
           height: 20px;
+		  font-family: 'Raleway', sans-serif;
         }
         
         td{
@@ -120,39 +126,7 @@
         	padding:5px;
         	color:black;
         }
-        
-        /* The Modal (background) */
-		.modal {
-		  display: none; /* Hidden by default */
-		  margin-left:5%;
-		  width: 80%; 
-		  overflow: auto; /* Enable scroll if needed */
-		  background-color: rgb(0,0,0); /* Fallback color */
-		  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-		}
-		
-		/* Modal Content/Box */
-		.modal-content {
-		  background-color: #fefefe;
-		  margin: 5% auto 15% auto; 
-		  border: 1px solid #888;
-		  width: 80%; /* Could be more or less, depending on screen size */
-		}
-        
-        .close {
-		  color: #000;
-		  font-size: 35px;
-		  font-weight: bold;
-		  float: right;
-		  margin-right: 30px;
-		}
-		
-		.close:hover,
-		.close:focus {
-		  color: red;
-		  cursor: pointer;
-		}
-	
+    
 		.reg-form{
 			margin-top:-80px;
 			padding: 50px;
@@ -167,117 +141,85 @@
 		    background: transparent;
 		}
 		
+		#op:hover{
+			margin-left: 10px;
+		}
+		
 		
 	</style>
 
 </head>
 <body>
-	<div class="container">
-    	<div class="header">
 
-			<div class="logo">
-				<h2 style="margin-left: 20px;">COMPANY LOGO</h2>
+	<div class="main">
+		<div class="navbar">
+			
+			<h2 style="color: white">LOGO</h2>
+			<h4 style="padding-left: 10px;margin-top: 10%;color: white">NAVBAR</h4>
+			
+			<ul>
+				<li id="op"><a href="/myApp/admin/Customers"><i class="fa fa-users" aria-hidden="true"></i> customers</a></li>
+				<li id="op"><a href=""><i class="fa fa-shopping-cart" aria-hidden="true"></i> products</a></li>
+				<li id="op"><a href=""><i class="fa fa-paper-plane" aria-hidden="true"></i> service</a></li>
+				<li id="op"><a href=""><i class="fa fa-exclamation-circle" aria-hidden="true"></i> tickets</a></li>
+				<li id="op"><a href=""><i class="fa fa-tasks" aria-hidden="true"></i> invoices</a></li>
+			</ul>
+		</div>
+
+		<div class="container">
+			<div class="header">
+				<div class="head" style="padding-left: 10px;">
+					<h4>MY CUSTOMERS</h4>
+				</div>
+				<div style="float: right;" class="tray">	
+						<a href="/myApp/admin/home">home</a>
+						<a href="">notification</a>
+						<a href="/myApp/admin/account">profile</a>
+						<a href="/myApp/logout">logout</a>
+					</ul>
+				</div>
 			</div>
-			<div class="tray">
-				<div style="float: right;">	
-					<a href="/myApp/admin/home">home</a>
-					<a href="">notification</a>
-					<a href="">profile</a>
-					<a href="/myApp/logout">logout</a>
+			<br>
+			
+			<div class="split">
+				<div class="options">
+					<ul>
+						<li id="op"><a href="/myApp/admin/addCustomer"><i class="fa fa-user-plus" aria-hidden="true"></i> 		Add Customers</a></li>
+						<li style="margin-left: 10px;"><a href=""><i class="fa fa-users" aria-hidden="true"></i> 	View Customers</a></li>
+						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	Edit Customer</a></li>
+					</ul>
+				</div>
+
+				<div class="profile">
+					<h3 style="padding-left: 30px">Customers</h3>
+						<div class="view-table">
+							<c:set var="size" scope="session" value="${fn:length(customers)}"/> 
+							<c:choose>
+							<c:when test="${size>0}">  
+								<table border="1">
+									<tr>
+										<th>ID</th>
+										<th>USERNAME</th>
+										<th>EMAIL</th>
+										<th>EDIT</th>
+									</tr>
+									<%int i=1; %>
+									<c:forEach var="customer" items="${customers}">
+										<tr>
+											<td><%=i++%></td>
+											<td>${customer.username}</td>
+											<td>${customer.email}</td>
+											<td><a href="/myApp/admin/editCustomer?username=${customer.username}" style="text-decoration: none;outline: none"><i class="fa fa-pencil" aria-hidden="true" style="margin-bottom: 5px;"></i></a></td>
+										</tr>
+									</c:forEach>
+								</table>
+							</c:when>
+						</c:choose>
+					</div>	
 				</div>
 			</div>
 		</div>
-		
-	<div class="content">	      
-		<div class="sidenav">
-			<h2>NAV-BAR</h2>
-			  <a href="#">CUSTOMERS</a>
-			  <a href="#">SERVICE</a>
-			  <a href="#">INVOICES</a>
-			  <a href="#">TICKETS</a>
-		</div>
-		
-		<div class="customer-details">
-			<form action="addCustomer">
-				<input type="submit" value="ADD" class="button">
-			</form>
-			
-			<div class="view-table">
-				<c:set var="size" scope="session" value="${fn:length(customers)}"/> 
-				<c:choose>
-					<c:when test="${size>0}">  
-						<table border="1">
-							<tr>
-								<th>ID</th>
-								<th>USERNAME</th>
-								<th>EMAIL</th>
-								<th>EDIT</th>
-								<th>DELETE</th>
-								<th>VIEW</th>
-							</tr>
-							<%int i=1; %>
-							<c:forEach var="customer" items="${customers}">
-								<tr>
-									<td><%=i++%></td>
-									<td>${customer.username}</td>
-									<td>${customer.email}</td>
-									<td><a href="/myApp/admin/profile?username=${customer.username}" style="text-decoration: none;outline: none"><i class="fa fa-pencil" aria-hidden="true" style="margin-bottom: 5px;"></i></a></td>
-									<td><a href="/myApp/admin/deleteCustomer?userId=${customer.customerId}" onclick="if(!(confirm('Are you sure want to delete?'))) return false"  style="text-decoration: none;outline: none"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
-									
-									<td><button onclick="expand()" style="width: auto;">VIEW</button></td>
-									
-									<div class="modal" id="view-details">
-						
-										<h3 style="padding: 5%;">DETAILS HERE<span onclick="document.getElementById('view-details').style.display='none'" class="close" title="Close Modal">&times;</span></h3>	
-										
-										<div class="reg-form">	
-											<label for="user">USERNAME</label>
-											<input id="user" value="${customer.username}" readonly="readonly"/>
-											<br>
-											<label for="company">COMPANY NAME</label>
-											<input id="company" value="${customer.companyName}" readonly="readonly"/>
-											<br>
-											<label for="email">EMAIL</label>
-											<input id="email" value="${customer.email}" readonly="readonly"/>
-											<br>
-											<label for="address">ADDRESS</label>
-											<input id="address" value="${customer.address}" readonly="readonly"/>
-											<br>
-											<label for="city">CITY</label>
-											<input id="city" value="${customer.city}" readonly="readonly"/>
-											<br>
-											<label for="state">STATE</label>
-											<input id="state" value="${customer.state}" readonly="readonly"/>
-											<br>
-											<label for="mobile">CONTACT</label>
-											<input id="mobile" value="${customer.mobile}" readonly="readonly"/>
-											<br>
-											<label for="website">WEBSITE</label>
-											<input id="website" value="${customer.website}" readonly="readonly"/>
-											
-											<div class="">
-												<a href="#">edit</a>
-												<a href="#">delete</a>
-											</div>
-										</div>
-									</div>
-								</tr>
-							</c:forEach>
-						</table>
-					</c:when>
-				</c:choose>
-			</div>	
-		</div>
-		</div>
 	</div>
-
-	<script type="text/javascript">
-	
-		function expand(){
-			document.getElementById('view-details').style.display='block';
-		}
-	
-	</script>
 
 </body>
 </html>

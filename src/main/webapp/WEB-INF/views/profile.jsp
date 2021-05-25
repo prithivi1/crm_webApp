@@ -126,6 +126,10 @@
 	        margin-top: 20px;
 	        margin-left: 40px;
 	      }
+	      
+	      #op:hover{
+	      	margin-left: 10px;
+	      }
 
 	</style>
 	
@@ -139,10 +143,11 @@
 			<h4 style="padding-left: 10px;margin-top: 10%;color: white">NAVBAR</h4>
 			
 			<ul>
-				<li><a href=""><i class="fa fa-users" aria-hidden="true"></i> customers</a></li>
-				<li><a href=""><i class="fa fa-paper-plane" aria-hidden="true"></i> service</a></li>
-				<li><a href=""><i class="fa fa-exclamation-circle" aria-hidden="true"></i> tickets</a></li>
-				<li><a href=""><i class="fa fa-tasks" aria-hidden="true"></i> invoices</a></li>
+				<li id="op"><a href="/myApp/admin/Customers"><i class="fa fa-users" aria-hidden="true"></i> customers</a></li>
+				<li id="op"><a href=""><i class="fa fa-shopping-cart" aria-hidden="true"></i> products</a></li>
+				<li id="op"><a href=""><i class="fa fa-paper-plane" aria-hidden="true"></i> service</a></li>
+				<li id="op"><a href=""><i class="fa fa-exclamation-circle" aria-hidden="true"></i> tickets</a></li>
+				<li id="op"><a href=""><i class="fa fa-tasks" aria-hidden="true"></i> invoices</a></li>
 			</ul>
 		</div>
 
@@ -164,9 +169,9 @@
 			<div class="split">
 				<div class="options">
 					<ul>
-						<li><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	Edit Profile</a></li>
-						<li><a href=""><i class="fa fa-bell" aria-hidden="true"></i> 	Notification</a></li>
-						<li><a href=""><i class="fa fa-shield" aria-hidden="true"></i> 	Password</a></li>
+						<li style="margin-left: 10px"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	Edit Profile</a></li>
+						<li id="op"><a href=""><i class="fa fa-bell" aria-hidden="true"></i> 	Notification</a></li>
+						<li id="op"><a href=""><i class="fa fa-shield" aria-hidden="true"></i> 	Password</a></li>
 					</ul>
 				</div>
 
@@ -212,21 +217,30 @@
 	              				grid-column-gap: 20px;">
 	              			
 	              			<div class="usernmae" style="margin-left: 40px;">
-	              				<label for="city">CITY</label><br>
-	              				<form:input path="city" id="city" value="${customer.city }"/>
+	              				<label for="address">ADDRESS</label><br>
+	              				<form:input path="address" id="address" value="${customer.address }"/>
 	              			</div>
 
 	              			<div class="companyName">
-	              				<label for="state">STATE</label><br>
-	              				<form:input path="state" id="state" value="${customer.state }"/>
+	              				<label for="city">CITY</label><br>
+	              				<form:input path="city" id="city" value="${customer.city }"/>
 	              			</div>
 	              		</div>
 						<br>
 						<br>
 						
-	              		<div class="fields" style="margin-left: 40px;">
-	              			<label for="website">WEBSITE</label><br>
-	              			<form:input path="website" id="website" value="${customer.website }"/>
+						<div class="name" style="display: grid; grid-template-columns: 1fr 1fr;
+	              				grid-column-gap: 20px;">
+	              			
+	              			<div class="usernmae" style="margin-left: 40px;">
+	              				<label for="state">STATE</label><br>
+	              				<form:input path="state" id="state" value="${customer.state }"/>
+	              			</div>
+
+	              			<div class="companyName">
+	              				<label for="website">WEBSITE</label><br>
+	              				<form:input path="website" id="website" value="${customer.website}"/>
+	              			</div>
 	              		</div>
 
 	              		<button class="button">UPDATE</button><br><br>

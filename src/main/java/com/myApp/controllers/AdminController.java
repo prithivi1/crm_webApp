@@ -1,12 +1,15 @@
 package com.myApp.controllers;
 
-import java.util.List;
+import java.util.List; 
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +20,8 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.myApp.DTO.CustomerProfileDTO;
+import com.myApp.DTO.CustomerRegisterDTO;
+import com.myApp.Entity.CustomerEntity;
 import com.myApp.Service.CustomerService;
 
 @Controller
@@ -30,17 +35,8 @@ public class AdminController {
 	@RequestMapping("/home")
 	public String getAdminUrl()
 	{
-		System.out.println("admin controller");
 		return "adminHome";
 	}	
-	
-	@GetMapping("/Customers")
-	public String showAllCustomerPage(Model model)
-	{
-		List<CustomerProfileDTO> list = customerService.getAllCustomers();
-		model.addAttribute("customers", list);
-		return "viewCustomers";
-	}
 	
 	@GetMapping("/account")
 	public String getProfileUpdate(Authentication authentication,Model model)
@@ -58,13 +54,48 @@ public class AdminController {
 		return "redirect:/admin/account?success";
 	}
 	
+	@GetMapping("/Customers")
+	public String showAllCustomerPage(Model model)
+	{
+		List<CustomerProfileDTO> list = customerService.getAllCustomers();
+		model.addAttribute("customers", list);
+		return "viewCustomers";
+	}
 	
-	@GetMapping("/profile")
+	@GetMapping("/addCustomer")
+	public String getAddCustomerPage(Model model)
+	{
+		CustomerRegisterDTO customer = new CustomerRegisterDTO();
+		model.addAttribute("customer", customer);
+		return "addCustomer";
+	}
+	
+	@PostMapping("/registerCustomer")
+	public String registerUser(@Valid @ModelAttribute("customer") CustomerRegisterDTO customerRegisterDTO,BindingResult result)
+	{
+		System.out.println("register controller");
+		
+		if(result.hasErrors())
+		{
+			return "/addCustomer";
+		}
+			
+		if(!customerService.registerNewCustomer(customerRegisterDTO))
+		{
+			System.out.println("REGISTRATION ERROR");
+			return "redirect:/admin/addCustomer?error";
+		}
+		
+		System.out.println("REGISTRATION SUCCESS");
+		return "redirect:/admin/addCustomer?register_success";
+	}
+	
+	@GetMapping("/editCustomer")
 	public String getCustomerProfile(@RequestParam(required=false,name="username") String username, Model model)
 	{
 		CustomerProfileDTO customer = customerService.getCustomerByUserName(username);
 		model.addAttribute("customer", customer);
-		return "CustomerProfile";
+		return "editCustomer";
 	}
 	
 	@PostMapping("/UpdateProfile")
@@ -75,7 +106,7 @@ public class AdminController {
 	}
 	
 	
-	@GetMapping("/deleteCustomer")
+	@PostMapping("/deleteCustomer")
 	public RedirectView deleteCustomer(@RequestParam("userId") int id,Model model){
 		
 		customerService.deleteCustomer(id);
