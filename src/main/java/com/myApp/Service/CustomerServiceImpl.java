@@ -30,7 +30,6 @@ public class CustomerServiceImpl implements CustomerService {
 	{
 		if(checkPasswordMatch(customer.getPassword(), customer.getConfirm_password()) && checkIfExist(customer.getUsername()))
 		{
-			System.out.println("REGISTER SERVICE");
 			CustomerEntity customerEntity = new CustomerEntity();
 			customerEntity.setUsername(customer.getUsername());
 			customerEntity.setEmail(customer.getEmail());
@@ -114,7 +113,6 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setPassword(temp.getPassword());
 		customer.setCustomerId(temp.getCustomerId());
 		CustomerEntity obj = convertToEntity(customer);
-		System.out.println("service=====>"+obj.getCustomerId());
 		customerDAO.updateCustomer(obj);
 	}
 

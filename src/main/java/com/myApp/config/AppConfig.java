@@ -13,6 +13,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -39,7 +41,7 @@ public class AppConfig implements WebMvcConfigurer{
 	{
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 		driverManagerDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/myapp");
+		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/webapp");
 		driverManagerDataSource.setUsername("root");
 		driverManagerDataSource.setPassword("1234");
 		
@@ -74,5 +76,12 @@ public class AppConfig implements WebMvcConfigurer{
     
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
     	registry.addResourceHandler("/URLToReach/**").addResourceLocations("/resources/");
+    }
+    
+    @Bean(name="filterMultipartResolver")
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSize(100000);
+        return multipartResolver;
     }
 }
