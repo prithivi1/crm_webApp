@@ -229,8 +229,8 @@
 			              </div>
 			              <div class="picture">
 			              		<div class="avatar-preview">
-						             	<img id="imagePreview" src="C:\Users\hp\Desktop\project webpage\pic.jpg" 
-						                  			alt="pic" width="200px" height="200px" style="border-radius: 50%" />
+						             	<img id="imagePreview" src="/myApp/URLToReach/img/cart.png" 
+						                  			alt="pic" width="200px" height="200px" />
 							    </div>
 			              </div>
 			       	</div>

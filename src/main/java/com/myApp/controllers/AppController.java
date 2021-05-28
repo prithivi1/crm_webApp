@@ -37,8 +37,10 @@ import org.springframework.security.authentication.AuthenticationTrustResolver;
 
 import com.myApp.DTO.CustomerRegisterDTO;
 import com.myApp.DTO.ProductDTO;
+import com.myApp.Entity.InvoiceEntity;
 import com.myApp.Service.CustomerService;
 import com.myApp.Service.ProductService;
+import com.myApp.Service.PurchaseService;
 
 @Controller
 @MultipartConfig
@@ -49,6 +51,9 @@ public class AppController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private PurchaseService purchaseService;
 	
 	@Autowired
     AuthenticationTrustResolver authenticationTrustResolver;
@@ -100,9 +105,7 @@ public class AppController {
         return authenticationTrustResolver.isAnonymous(authentication);
     }
 	
-
-	
-	@RequestMapping(value = "/getStudentPhoto/{name}")
+	@RequestMapping(value = "/getPhoto/{name}")
 	public void getStudentPhoto(HttpServletResponse response, @PathVariable("name") String name) throws Exception {
 		System.out.println(name);
 		response.setContentType("image/jpeg");
@@ -111,6 +114,14 @@ public class AppController {
 		byte[] bytes = ph.getBytes(1, (int) ph.length());
 		InputStream inputStream = new ByteArrayInputStream(bytes);
 		IOUtils.copy(inputStream, response.getOutputStream());
+	}
+	
+	@GetMapping("/invoice/{invoiceId}")
+	public String getInvoicePage(@PathVariable("invoiceId") long invoiceId,Model model)
+	{
+		InvoiceEntity invoice = purchaseService.getInvoiceById(invoiceId);
+		model.addAttribute("invoice",invoice);
+		return "invoicePage";
 	}
 	
 }

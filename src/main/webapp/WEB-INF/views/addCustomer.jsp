@@ -143,12 +143,11 @@
 	<div class="main">
 		<div class="navbar">
 			
-			<h2 style="color: white">LOGO</h2>
-			<h4 style="padding-left: 10px;margin-top: 10%;color: white">NAVBAR</h4>
 			
+			<br>
 			<ul>
 				<li id="op"><a href="/myApp/admin/Customers"><i class="fa fa-users" aria-hidden="true"></i> customers</a></li>
-				<li id="op"><a href=""><i class="fa fa-shopping-cart" aria-hidden="true"></i> products</a></li>
+				<li id="op"><a href="/myApp/admin/addProduct"><i class="fa fa-shopping-cart" aria-hidden="true"></i> products</a></li>
 				<li id="op"><a href=""><i class="fa fa-paper-plane" aria-hidden="true"></i> service</a></li>
 				<li id="op"><a href=""><i class="fa fa-exclamation-circle" aria-hidden="true"></i> tickets</a></li>
 				<li id="op"><a href=""><i class="fa fa-tasks" aria-hidden="true"></i> invoices</a></li>

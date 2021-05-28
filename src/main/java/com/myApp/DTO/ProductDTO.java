@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ProductDTO {
 	
+	private long productId;
 //	@NotBlank(message = "please enter product name")
 	private String name;
 //	@NotBlank(message = "please enter product cost")
@@ -27,6 +28,12 @@ public class ProductDTO {
 	public ProductDTO() {
 	}
 
+	public long getProductId() {
+		return productId;
+	}
+	public void setProductId(long productId) {
+		this.productId = productId;
+	}
 	public String getName() {
 		return name;
 	}

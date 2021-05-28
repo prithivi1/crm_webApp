@@ -32,8 +32,10 @@ import com.myApp.DTO.CustomerProfileDTO;
 import com.myApp.DTO.CustomerRegisterDTO;
 import com.myApp.DTO.ProductDTO;
 import com.myApp.Entity.CustomerEntity;
+import com.myApp.Entity.InvoiceEntity;
 import com.myApp.Service.CustomerService;
 import com.myApp.Service.ProductService;
+import com.myApp.Service.PurchaseService;
 
 @Controller
 @RequestMapping("/admin")
@@ -44,6 +46,9 @@ public class AdminController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private PurchaseService purchaseService;
 	
 	@RequestMapping("/home")
 	public String getAdminUrl()
@@ -153,6 +158,13 @@ public class AdminController {
 		return "adminShop";
 	}
 	
+	@GetMapping("/invoices")
+	public String getInvoicePage(Model model)
+	{
+		List<InvoiceEntity> invoice = purchaseService.getAllInvoices();
+		model.addAttribute("invoice", invoice);
+		return "adminInvoice";
+	}
 }  
 	
 	

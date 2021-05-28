@@ -42,10 +42,10 @@ public class ProductServiceImpl implements ProductService {
 	public ProductDTO convertToDTO(ProductEntity product)
 	{
 		ProductDTO ob = new ProductDTO();
+		ob.setProductId(product.getProductId());
 		ob.setName(product.getName());
 		ob.setCost(product.getCost());
 		ob.setDiscription(product.getDiscription());
-//		ob.setPicture(product.getPicture());
 		return ob;
 	}
 

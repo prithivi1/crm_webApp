@@ -88,6 +88,13 @@ public class CustomerProfileDTO {
 	public void setWebsite(String website) {
 		this.website = website;
 	}
+	@Override
+	public String toString() {
+		return "CustomerProfileDTO [customerId=" + customerId + ", username=" + username + ", companyName="
+				+ companyName + ", password=" + password + ", email=" + email + ", address=" + address + ", city="
+				+ city + ", state=" + state + ", mobile=" + mobile + ", website=" + website + "]";
+	}
+	
 	
 	
 }

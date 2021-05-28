@@ -1,5 +1,7 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -152,8 +154,6 @@
 	<div class="main">
 		<div class="navbar">
 			
-			<h2 style="padding-left: 10px;margin-top: 20%;color: white"><i class="fa fa-podcast" aria-hidden="true"></i>
-			ZEBKART</h2>
 			<i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 100px;color: white;margin-left: 25px;"></i>
 
 			<ul>
@@ -170,9 +170,9 @@
 					<h4>WELCOME PRITHIVI</h4>
 				</div>
 				<div style="float: right;" class="tray">	
-						<a href="/myApp/admin/home">home</a>
+						<a href="/myApp/customer/home">home</a>
 						<a href="">notification</a>
-						<a href="/myApp/admin/account">profile</a>
+						<a href="/myApp/customer/account">profile</a>
 						<a href="/myApp/logout">logout</a>
 					</ul>
 				</div>
@@ -189,54 +189,21 @@
 				<div class="profile">
 					<h3 style="padding-left: 30px">Shop</h3>
 					<div class="area">
-						<div class="item">
-							<div>
-								<img src="C:\Users\hp\Desktop\project webpage\pic.jpg" alt="image" 
-									width="100" height="100">
+						<c:forEach var="i" items="${product}">
+							
+							<div class="item">
+								<div>
+									<img src="/myApp/getPhoto/<c:out value='${i.name}'/>" alt="image" 
+										width="100" height="100">
+								</div>
+								<div>
+									<h3>${i.name}</h3>
+									<h4>${i.cost}</h4>
+									<p style="line-height: 15px;">${i.discription}</p>
+								</div>
 							</div>
-							<div>
-								<h3>PRODUCT NAME</h3>
-								<h4>$500</h4>
-								<p style="line-height: 15px;">This is a short description about product</p>
-							</div>
-						</div>
-						<br>
-						<div class="item">
-							<div>
-								<img src="C:\Users\hp\Desktop\project webpage\pic.jpg" alt="image" 
-									width="100" height="100">
-							</div>
-							<div>
-								<h3>PRODUCT NAME</h3>
-								<h4>$500</h4>
-								<p style="line-height: 15px;">This is a short description about product</p>
-							</div>
-						</div>
-						<br>
-						<div class="item">
-							<div>
-								<img src="C:\Users\hp\Desktop\project webpage\pic.jpg" alt="image" 
-									width="100" height="100">
-							</div>
-							<div>
-								<h3>PRODUCT NAME</h3>
-								<h4>$500</h4>
-								<p style="line-height: 15px;">This is a short description about product</p>
-							</div>
-						</div>
-						<br>
-						<div class="item">
-							<div>
-								<img src="C:\Users\hp\Desktop\project webpage\pic.jpg" alt="image" 
-									width="100" height="100">
-							</div>
-							<div>
-								<h3>PRODUCT NAME</h3>
-								<h4>$500</h4>
-								<p style="line-height: 15px;">This is a short description about product</p>
-							</div>
-						</div>
-
+							<br>
+						</c:forEach>
 					</div>
 				</div>
 			</div>

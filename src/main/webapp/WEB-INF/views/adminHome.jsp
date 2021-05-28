@@ -152,7 +152,7 @@
               </div>
             </a>
  			
- 			 <a href="#">
+ 			 <a href="/myApp/admin/invoices">
               <div class="datas" style="margin-top: 20px; text-align: center;">
                 <i style="font-size: 50px;margin-top: 10%" class="fa fa-tasks" aria-hidden="true"></i><br><br>
                 <h4 style="margin-top: 0px;">INVOICES</h4>

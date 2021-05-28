@@ -87,6 +87,7 @@
 
 		.profile{
 			width: 90%;
+			height: 55ch;
 			/*background-color: yellow;*/
 		}
 
@@ -175,8 +176,8 @@
 				<div class="options">
 					<ul>
 						<li style="margin-left: 10px;"><a href="@"><i class="fa fa-shopping-bag" aria-hidden="true"></i> 		Shop</a></li>
-						<li id="op"><a href="@"><i class="fa fa-user-plus" aria-hidden="true"></i> 		Add Products</a></li>
-						<li id="op"><a href="/myApp/admin/Customers"><i class="fa fa-users" aria-hidden="true"></i> 	View products</a></li>
+						<li id="op"><a href="/myApp/admin/addProduct"><i class="fa fa-user-plus" aria-hidden="true"></i> 		Add Products</a></li>
+						<li id="op"><a href=""><i class="fa fa-users" aria-hidden="true"></i> 	View products</a></li>
 						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	Edit Products</a></li>
 					</ul>
 				</div>
@@ -186,7 +187,7 @@
 					<div class="area">
 						<c:forEach var="i" items="${product}">
 							<div class="item">
-								<img src="/myApp/getStudentPhoto/<c:out value='${i.name}'/>" alt="image" width="100" height="100">
+								<img src="/myApp/getPhoto/<c:out value='${i.name}'/>" alt="image" width="100" height="100">
 								<h3>${i.name}</h3>
 								<h4>${i.cost}</h4>
 								<p style="line-height: 15px;">${i.discription}</p>

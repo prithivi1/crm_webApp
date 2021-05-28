@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>customer support</title>
+	<title>invoices</title>
 	<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"/>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     
@@ -98,8 +98,6 @@
           border-collapse: collapse;
           width: 100%;
           margin-left:20px;
-          outline: none;
-          border: none;
           font-family: 'Raleway', sans-serif;
         }
 
@@ -147,10 +145,10 @@
 		
 		
 	</style>
+	
 
 </head>
 <body>
-
 	<div class="main">
 		<div class="navbar">
 			
@@ -162,7 +160,7 @@
 				<li id="op"><a href="/myApp/admin/addProduct"><i class="fa fa-shopping-cart" aria-hidden="true"></i> products</a></li>
 				<li id="op"><a href=""><i class="fa fa-paper-plane" aria-hidden="true"></i> service</a></li>
 				<li id="op"><a href=""><i class="fa fa-exclamation-circle" aria-hidden="true"></i> tickets</a></li>
-				<li id="op"><a href=""><i class="fa fa-tasks" aria-hidden="true"></i> invoices</a></li>
+				<li id="op"><a href="/myApp/admin/invoices"><i class="fa fa-tasks" aria-hidden="true"></i> invoices</a></li>
 			</ul>
 		</div>
 
@@ -184,32 +182,34 @@
 			<div class="split">
 				<div class="options">
 					<ul>
-						<li id="op"><a href="/myApp/admin/addCustomer"><i class="fa fa-user-plus" aria-hidden="true"></i> 		Add Customers</a></li>
-						<li style="margin-left: 10px;"><a href=""><i class="fa fa-users" aria-hidden="true"></i> 	View Customers</a></li>
-						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	Edit Customer</a></li>
+						<li id="op"><a href="/myApp/admin/invoices"><i class="fa fa-user-plus" aria-hidden="true"></i> 		All Invoices</a></li>
+						<li id="op"><a href=""><i class="fa fa-users" aria-hidden="true"></i> 	Top Products</a></li>
+						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	Search</a></li>
 					</ul>
 				</div>
 
 				<div class="profile">
-					<h3 style="padding-left: 30px">Customers</h3>
+					<h3 style="padding-left: 30px">INVOICE</h3>
 						<div class="view-table">
-							<c:set var="size" scope="session" value="${fn:length(customers)}"/> 
+							<c:set var="size" scope="session" value="${fn:length(invoice)}"/> 
 							<c:choose>
 							<c:when test="${size>0}">  
 								<table border="1">
 									<tr>
-										<th>ID</th>
+										<th>INVOICE ID</th>
 										<th>USERNAME</th>
-										<th>EMAIL</th>
-										<th>EDIT</th>
+										<th>ITEM NAME</th>
+										<th>DATE</th>
+										<th>VIEW</th>
 									</tr>
 									<%int i=1; %>
-									<c:forEach var="customer" items="${customers}">
+									<c:forEach var="i" items="${invoice}">
 										<tr>
-											<td><%=i++%></td>
-											<td>${customer.username}</td>
-											<td>${customer.email}</td>
-											<td><a href="/myApp/admin/editCustomer?username=${customer.username}" style="text-decoration: none;outline: none"><i class="fa fa-pencil" aria-hidden="true" style="margin-bottom: 5px;"></i></a></td>
+											<td>${i.invoiceId }</td>
+											<td>${i.username }</td>
+											<td>${i.productName }</td>
+											<td>${i.invoiceDate }</td>
+											<td><a target="blank" href="/myApp/invoice/${i.invoiceId}" style="text-decoration: none;outline: none;color: black"><i class="fa fa-sign-in" aria-hidden="true"></i></a></td>
 										</tr>
 									</c:forEach>
 								</table>
@@ -220,6 +220,6 @@
 			</div>
 		</div>
 	</div>
-
+	
 </body>
 </html>

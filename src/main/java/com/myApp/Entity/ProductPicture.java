@@ -9,6 +9,7 @@ import javax.persistence.*;
 public class ProductPicture {
 	
 	@Id
+	private long productId;
 	private String name;
 	private float cost;
 	private String discription;

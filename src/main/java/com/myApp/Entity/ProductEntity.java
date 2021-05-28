@@ -1,7 +1,11 @@
 package com.myApp.Entity;
 
 
-import javax.persistence.Entity; 
+import java.util.Arrays;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,12 +15,22 @@ import org.springframework.web.multipart.MultipartFile;
 @Table(name="products")
 public class ProductEntity {
 	
+	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long productId;
 	private String name;
 	private float cost;
 	private String discription;
 	private byte[] picture;
 	
+
+	public long getProductId() {
+		return productId;
+	}
+	public void setProductId(long productId) {
+		this.productId = productId;
+	}
 	public String getName() {
 		return name;
 	}
@@ -41,4 +55,11 @@ public class ProductEntity {
 	public void setPicture(byte[] picture) {
 		this.picture = picture;
 	}
+	
+	@Override
+	public String toString() {
+		return "ProductEntity [productId=" + productId + ", name=" + name + ", cost=" + cost + ", discription="
+				+ discription + ", picture=" + Arrays.toString(picture) + "]";
+	}
+	
 }

@@ -1,5 +1,7 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -195,10 +197,7 @@
 	<div class="main">
 		<div class="navbar">
 			
-			<h2 style="padding-left: 10px;margin-top: 20%;color: white"><i class="fa fa-podcast" aria-hidden="true"></i>
-			ZEBKART</h2>
 			<i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 100px;color: white;margin-left: 25px;"></i>
-
 			<ul>
 				<li id="op"><a href="/myApp/customer/home"><i class="fa fa-shopping-bag" aria-hidden="true"></i> shop</a></li>
 				<li id="op"><a href="/myApp/customer/myProduct"><i class="fa fa-shopping-cart" aria-hidden="true"></i> my products</a></li>
@@ -213,9 +212,9 @@
 					<h4>WELCOME PRITHIVI</h4>
 				</div>
 				<div style="float: right;" class="tray">	
-						<a href="/myApp/admin/home">home</a>
+						<a href="/myApp/customer/home">home</a>
 						<a href="">notification</a>
-						<a href="/myApp/admin/account">profile</a>
+						<a href="/myApp/customer/account">profile</a>
 						<a href="/myApp/logout">logout</a>
 					</ul>
 				</div>
@@ -225,9 +224,9 @@
 			<div class="split">
 				<div class="options">
 					<ul>
-						<li id="op"><a href="@"><i class="fa fa-bars" aria-hidden="true"></i> 		Request Service</a></li>
-						<li id="op"><a href="@"><i class="fa fa-ticket" aria-hidden="true"></i>	Rasied Tickets</a></li>
-						<li id="op"><a href=""><i class="fa fa-check" aria-hidden="true"></i> 	Resolved Tickets</a></li>
+						<li id="op"><a href="/myApp/customer/service"><i class="fa fa-bars" aria-hidden="true"></i> 		Request Service</a></li>
+						<li id="op"><a href="/myApp/customer/pending"><i class="fa fa-ticket" aria-hidden="true"></i>	Rasied Tickets</a></li>
+						<li id="op"><a href="/myApp/customer/resolved"><i class="fa fa-check" aria-hidden="true"></i> 	Resolved Tickets</a></li>
 						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	General Tickets</a></li>
 
 					</ul>
@@ -237,40 +236,50 @@
 					<h3 style="padding-left: 30px">Request Service</h3>
 					<div class="divide">
 						<div class="form">
-
-		              		<div class="fields" style="margin-left: 40px;">
-		              			<label >NAME</label><br>
-		              			<input type="text" name="" value="PRITHIVI"></input>
-		              		</div>
-		              		<br>
-		              		<div class="fields" style="margin-left: 40px;">
-		              			<label >EMAIL</label><br>
-		              			<input type="text" name="" value="prithivi@gmail.com"></input>
-		              		</div>
-		              		<br>
-		              		<div class="fields" style="margin-left: 40px;">
-		              			<label >PRODUCT</label><br>
-		              			<select name="cars" id="cars">
-								    <option value="volvo">Volvo</option>
-								    <option value="saab">Saab</option>
-								    <option value="opel">Opel</option>
-								    <option value="audi">Audi</option>
-								 </select>
-		              		</div>
-							<br>
-
-		              		<div class="fields" style="margin-left: 40px;">
-		              			<label >DESCRIPTION</label><br>
-		              			<textarea rows="5" cols="100"></textarea>
-		              		</div>
-		              		<br>
-		              		<button class="button">UPDATE</button>
+							<form:form action="postService" method="POST" modelAttribute="service">
+			              		
+			              		
+			              		
+			              		<div class="fields" style="margin-left: 40px;">
+			              			<label >NAME</label><br>
+			              			<form:input path="customerName"/>
+			              		</div>
+			              		<br>
+			              		<div class="fields" style="margin-left: 40px;">
+			              			<label >EMAIL</label><br>
+			              			<form:input path="customerEmail"/>
+			              		</div>
+			              		<br>
+			              		<div class="fields" style="margin-left: 40px;">
+			              			<label >PRODUCT</label><br>
+			              			<form:select path="item">
+			              				<c:forEach var="product" items="${product}">
+				              				<form:option value="${product.name }" label="${product.name }"/>  
+								        </c:forEach>
+			              			 </form:select>
+			              		</div>
+								<br>
+	
+			              		<div class="fields" style="margin-left: 40px;">
+			              			<label >DESCRIPTION</label><br>
+			              			<form:textarea path="description" rows="5" cols="100"/>
+			              		</div>
+			              		<br>
+			              		<button class="button">SEND</button>
+			              	</form:form>
 						</div>
 						<div align="center">
 							<img src="/myApp/URLToReach/img/oops.jpg" alt="image" width="200" height="100">
 							<p>We are extremely sorry for the inconvience.</p>
 							<p>Our Service with get to you Quickly</p>
 							<p>Send us you Query</p>
+							<br>
+							<br>
+							<c:if test="${param.success !=null}">
+									<h2 style="color: green">registration successful</h2>
+									<br>
+									<br>
+								</c:if>
 						</div>
 					</div>
 				</div>

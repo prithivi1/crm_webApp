@@ -150,8 +150,6 @@
 	<div class="main">
 		<div class="navbar">
 			
-			<h2 style="padding-left: 10px;margin-top: 20%;color: white"><i class="fa fa-podcast" aria-hidden="true"></i>
-			ZEBKART</h2>
 			<i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 100px;color: white;margin-left: 25px;"></i>
 
 			<ul>
@@ -168,9 +166,9 @@
 					<h4>WELCOME PRITHIVI</h4>
 				</div>
 				<div style="float: right;" class="tray">	
-						<a href="/myApp/admin/home">home</a>
+						<a href="/myApp/customer/home">home</a>
 						<a href="">notification</a>
-						<a href="/myApp/admin/account">profile</a>
+						<a href="/myApp/customer/account">profile</a>
 						<a href="/myApp/logout">logout</a>
 					</ul>
 				</div>
@@ -184,13 +182,15 @@
 					<div class="area">
 						<c:forEach var="i" items="${product}">
 							<div class="item">
-								<img src="/myApp/getStudentPhoto/<c:out value='${i.name}'/>" alt="image" width="100" height="100">
+								<img src="/myApp/getPhoto/<c:out value='${i.name}'/>" alt="image" width="100" height="100">
 								<h3>${i.name}</h3>
 								<h4>${i.cost}</h4>
 								<p style="line-height: 15px;">${i.discription}</p>
-								<form action="">
+								
+								<form:form action="buy/${i.productId}" method="POST">
 									<button class="button"> BUY</button>
-								</form>
+								</form:form>
+								
 							</div>
 						</c:forEach>
 					</div>
