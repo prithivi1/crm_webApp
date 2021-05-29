@@ -225,9 +225,10 @@
 	<div class="main">
 		<div class="navbar">
 			
-			<h2 style="padding-left: 10px;margin-top: 20%;color: white"><i class="fa fa-podcast" aria-hidden="true"></i>
-			ZEBKART</h2>
-			<i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 100px;color: white;margin-left: 25px;"></i>
+			<br>
+			<h4 align="center" style="color: white">WELCOME</h4>
+			<i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 90px;color: white;margin-left: 25px;"></i>
+			
 
 			<ul>
 				<li id="op"><a href="/myApp/customer/home"><i class="fa fa-shopping-bag" aria-hidden="true"></i> shop</a></li>
@@ -240,7 +241,7 @@
 		<div class="container">
 			<div class="header">
 				<div class="head" style="padding-left: 10px;">
-					<h4>WELCOME PRITHIVI</h4>
+					<h4>SERVICE</h4>
 				</div>
 				<div style="float: right;" class="tray">	
 						<a href="/myApp/customer/home">home</a>
@@ -269,12 +270,12 @@
 						<table border="1">
 							<tr>
 								<th>TICKET ID</th>
+								<th>DATE</th>
 								<th>USERNAME</th>
 								<th>PRODUCT</th>
 								<td>DESCRIPTION</td>
-								<th>DATE</th>
+								<th>ACTION</th>
 								<th>STATUS</th>
-								<th>DELETE</th>
 							</tr>
 							<tr>
 								<c:forEach var="ticket" items="${ticket}">
@@ -282,12 +283,12 @@
 									<c:when test="${ticket.status==true}">  
 										<tr>
 											<td>${ticket.serviceId }</td>
+											<td>${ticket.date}</td>
 											<td>${ticket.customerName}</td>
 											<td>${ticket.item}</td>
 											<td>${ticket.description}</td>
-											<td>26/05/2021</td>
+											<td>${ticket.action}</td>
 											<td style="padding: 10px;"><label style="background-color: green;padding:5px;">Solved</label></td>
-											<td><a href="/myApp/admin/editCustomer?username=${customer.username}" style="text-decoration: none;outline: none"><i class="fa fa-pencil" aria-hidden="true" style="margin-bottom: 5px;"></i></a></td>
 										</tr>
 									</c:when>
 									</c:choose>

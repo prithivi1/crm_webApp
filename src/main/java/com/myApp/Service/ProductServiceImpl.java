@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myApp.DAO.ProductDAO;
+import com.myApp.DAO.PurchaseDAO;
 import com.myApp.DTO.ProductDTO;
 import com.myApp.Entity.ProductEntity;
 
@@ -17,6 +18,10 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductDAO productDAO;
+	
+	@Autowired
+	private PurchaseDAO purchaseDAO;
+	
 	
 	public void updateProduct(ProductDTO product) {
 		ProductEntity obj = new ProductEntity();
@@ -51,6 +56,22 @@ public class ProductServiceImpl implements ProductService {
 
 	public Blob getPhotoByName(String name) {
 		return productDAO.getPhotoByName(name);
+	}
+
+	public ProductDTO getProductById(long id) {
+		ProductEntity ob = purchaseDAO.getProductDetailsById(id);
+		return convertToDTO(ob);
+	}
+
+	public void updateProductDetails(ProductDTO product) {
+		ProductEntity obj = new ProductEntity();
+		obj.setProductId(product.getProductId());
+		obj.setName(product.getName());
+		obj.setCost(product.getCost());
+		obj.setDiscription(product.getDiscription());
+		obj.setPicture(product.getPicture());
+		
+		productDAO.updateProduct(obj);
 	}
 
 }

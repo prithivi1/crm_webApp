@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -98,7 +98,7 @@
           border-collapse: collapse;
           width: 100%;
           margin-left:20px;
-          font-family: 'Raleway', sans-serif;
+          font-family: 'arial', sans-serif;
           box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
 
@@ -146,15 +146,14 @@
 		
 		
 	</style>
-
 </head>
 <body>
-
 	<div class="main">
 		<div class="navbar">
 			
-			<h2 style="color: white">LOGO</h2>
-			<h4 style="padding-left: 10px;margin-top: 10%;color: white">NAVBAR</h4>
+			<br>
+			<h4 align="center" style="color: white">WELCOME</h4>
+			<i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 90px;color: white;margin-left: 25px;"></i>
 			
 			<ul>
 				<li id="op"><a href="/myApp/admin/Customers"><i class="fa fa-users" aria-hidden="true"></i> customers</a></li>
@@ -168,12 +167,12 @@
 		<div class="container">
 			<div class="header">
 				<div class="head" style="padding-left: 10px;">
-					<h4>MY CUSTOMERS</h4>
+					<h4>SERVICE</h4>
 				</div>
 				<div style="float: right;" class="tray">	
-						<a href="/myApp/admin/home">home</a>
+						<a href="/myApp/customer/home">home</a>
 						<a href="">notification</a>
-						<a href="/myApp/admin/account">profile</a>
+						<a href="/myApp/customer/account">profile</a>
 						<a href="/myApp/logout">logout</a>
 					</ul>
 				</div>
@@ -183,42 +182,50 @@
 			<div class="split">
 				<div class="options">
 					<ul>
-						<li id="op"><a href="/myApp/admin/addCustomer"><i class="fa fa-user-plus" aria-hidden="true"></i> 		Add Customers</a></li>
-						<li style="margin-left: 10px;"><a href=""><i class="fa fa-users" aria-hidden="true"></i> 	View Customers</a></li>
-						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	Edit Customer</a></li>
+						<li id="op"><a href="/myApp/admin/ticketsPending"><i class="fa fa-ticket" aria-hidden="true"></i>	Pending Tickets</a></li>
+						<li id="op"><a href="/myApp/admin/ticketsResolved"><i class="fa fa-check" aria-hidden="true"></i> 	Resolved Tickets</a></li>
+						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	Assign Work</a></li>
+						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	Create Team</a></li>
+						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	View Work</a></li>
 					</ul>
 				</div>
 
 				<div class="profile">
-					<h3 style="padding-left: 30px">Customers</h3>
-						<div class="view-table">
-							<c:set var="size" scope="session" value="${fn:length(customers)}"/> 
-							<c:choose>
-							<c:when test="${size>0}">  
-								<table border="1">
-									<tr>
-										<th>ID</th>
-										<th>USERNAME</th>
-										<th>EMAIL</th>
-										<th>EDIT</th>
-									</tr>
-									<%int i=1; %>
-									<c:forEach var="customer" items="${customers}">
+					<h3 style="padding-left: 30px">PENDING TICKETS</h3>
+					<div class="form">
+						<table border="1">
+							<tr>
+								<th>TICKET ID</th>
+								<th>USERNAME</th>
+								<th>PRODUCT</th>
+								<td>DESCRIPTION</td>
+								<th>DATE</th>
+								<th>STATUS</th>
+								<th>Action</th>
+							</tr>
+							<tr>
+								<c:forEach var="ticket" items="${ticket}">
+									<c:choose>
+									<c:when test="${ticket.status==false}">  
 										<tr>
-											<td><%=i++%></td>
-											<td>${customer.username}</td>
-											<td>${customer.email}</td>
-											<td><a href="/myApp/admin/editCustomer?username=${customer.username}" style="text-decoration: none;outline: none"><i class="fa fa-pencil" aria-hidden="true" style="margin-bottom: 5px;"></i></a></td>
+											<td>${ticket.serviceId }</td>
+											<td>${ticket.customerName}</td>
+											<td>${ticket.item}</td>
+											<td>${ticket.description}</td>
+											<td>26/05/2021</td>
+											<td style="padding: 10px;"><label style="background-color: orange;padding:5px;">In Progress</label></td>
+											<td><a href="/myApp/admin/takeAction/${ticket.serviceId}" style="text-decoration: none;outline: none"><i class="fa fa-pencil" aria-hidden="true" style="margin-bottom: 5px;"></i></a></td>
 										</tr>
-									</c:forEach>
-								</table>
-							</c:when>
-						</c:choose>
-					</div>	
+									</c:when>
+									</c:choose>
+								</c:forEach>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
+	</div>
+	
 </body>
 </html>

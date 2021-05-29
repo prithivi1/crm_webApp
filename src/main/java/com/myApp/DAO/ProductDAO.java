@@ -13,4 +13,6 @@ public interface ProductDAO {
 	public List<ProductEntity> getAllProducts();
 	
 	public Blob getPhotoByName(String name);
+	
+	public void updateProduct(ProductEntity product);
 }

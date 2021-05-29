@@ -1,12 +1,13 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@page import="java.util.List"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>my Products</title>
+	<title>service</title>
 	<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"/>
   	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	  
@@ -192,7 +193,34 @@
 				margin-left: 10px;
 			}
 
+			table {
+		      border-collapse: collapse;
+		      width: 90%;
+		      margin-left:20px;
+		      font-family: 'arial', sans-serif;
+		    }
+
+		    th {
+		      text-align: center;
+		      padding: 8px;
+		      height: 20px;
+			  font-family: 'Raleway', sans-serif;
+		    }
+		    
+		    td{
+		    	padding-left:2px;
+		    	padding-top:20px;
+		    	text-align: center;
+		    }
+
+		    tr {
+		      background-color: transparent;
+		      color:black;
+		    }
+
 		</style>
+	
+</head>
 <body>
 	<div class="main">
 		<div class="navbar">
@@ -201,12 +229,13 @@
 			<h4 align="center" style="color: white">WELCOME</h4>
 			<i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 90px;color: white;margin-left: 25px;"></i>
 			
-			
+
 			<ul>
-				<li id="op"><a href="/myApp/customer/home"><i class="fa fa-shopping-bag" aria-hidden="true"></i> shop</a></li>
-				<li id="op"><a href="/myApp/customer/myProduct"><i class="fa fa-shopping-cart" aria-hidden="true"></i> my products</a></li>
-				<li id="op"><a href="/myApp/customer/service"><i class="fa fa-paper-plane" aria-hidden="true"></i> service</a></li>
-				<li id="op"><a href="/myApp/customer/invoice"><i class="fa fa-tasks" aria-hidden="true"></i> invoices</a></li>
+				<li id="op"><a href="/myApp/admin/Customers"><i class="fa fa-users" aria-hidden="true"></i> customers</a></li>
+				<li id="op"><a href="/myApp/admin/addProduct"><i class="fa fa-shopping-cart" aria-hidden="true"></i> products</a></li>
+				<li id="op"><a href="/myApp/admin/ticketsPending"><i class="fa fa-paper-plane" aria-hidden="true"></i> tickets</a></li>
+				<li id="op"><a href=""><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Teams</a></li>
+				<li id="op"><a href="/myApp/admin/invoices"><i class="fa fa-tasks" aria-hidden="true"></i> invoices</a></li>
 			</ul>
 		</div>
 
@@ -228,68 +257,49 @@
 			<div class="split">
 				<div class="options">
 					<ul>
-						<li id="op"><a href="/myApp/customer/service"><i class="fa fa-bars" aria-hidden="true"></i> 		Request Service</a></li>
-						<li id="op"><a href="/myApp/customer/pending"><i class="fa fa-ticket" aria-hidden="true"></i>	Rasied Tickets</a></li>
-						<li id="op"><a href="/myApp/customer/resolved"><i class="fa fa-check" aria-hidden="true"></i> 	Resolved Tickets</a></li>
-						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	General Tickets</a></li>
+						<li id="op"><a href="/myApp/admin/ticketsPending"><i class="fa fa-ticket" aria-hidden="true"></i>	Pending Tickets</a></li>
+						<li id="op"><a href="/myApp/admin/ticketsResolved"><i class="fa fa-check" aria-hidden="true"></i> 	Resolved Tickets</a></li>
+						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	Assign Work</a></li>
+						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	Create Team</a></li>
+						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	View Work</a></li>
 
 					</ul>
 				</div>
 
 				<div class="profile">
-					<h3 style="padding-left: 30px">Request Service</h3>
-					<div class="divide">
-						<div class="form">
-							<form:form action="postService" method="POST" modelAttribute="service">
-			              		
-			              		
-			              		
-			              		<div class="fields" style="margin-left: 40px;">
-			              			<label >NAME</label><br>
-			              			<form:input path="customerName"/>
-			              		</div>
-			              		<br>
-			              		<div class="fields" style="margin-left: 40px;">
-			              			<label >EMAIL</label><br>
-			              			<form:input path="customerEmail"/>
-			              		</div>
-			              		<br>
-			              		<div class="fields" style="margin-left: 40px;">
-			              			<label >PRODUCT</label><br>
-			              			<form:select path="item">
-			              				<c:forEach var="product" items="${product}">
-				              				<form:option value="${product.name }" label="${product.name }"/>  
-								        </c:forEach>
-			              			 </form:select>
-			              		</div>
-								<br>
-	
-			              		<div class="fields" style="margin-left: 40px;">
-			              			<label >DESCRIPTION</label><br>
-			              			<form:textarea path="description" rows="5" cols="100"/>
-			              		</div>
-			              		<br>
-			              		<button class="button">SEND</button>
-			              	</form:form>
-						</div>
-						<div align="center">
-							<img src="/myApp/URLToReach/img/oops.jpg" alt="image" width="200" height="100">
-							<p>We are extremely sorry for the inconvience.</p>
-							<p>Our Service with get to you Quickly</p>
-							<p>Send us you Query</p>
-							<br>
-							<br>
-							<c:if test="${param.success !=null}">
-									<h2 style="color: green">registration successful</h2>
-									<br>
-									<br>
-								</c:if>
-						</div>
+					<h3 style="padding-left: 30px">PENDING TICKETS</h3>
+					<div class="form">
+						<table border="1">
+							<tr>
+								<th>TICKET ID</th>
+								<th>USERNAME</th>
+								<th>PRODUCT</th>
+								<td>DESCRIPTION</td>
+								<th>DATE</th>
+								<th>STATUS</th>
+								<th>VIEW ACTION</th>
+							</tr>
+							<tr>
+								<c:forEach var="ticket" items="${ticket}">
+									<c:choose>
+									<c:when test="${ticket.status==true}">  
+										<tr>
+											<td>${ticket.serviceId }</td>
+											<td>${ticket.customerName}</td>
+											<td>${ticket.item}</td>
+											<td>${ticket.description}</td>
+											<td>26/05/2021</td>
+											<td style="padding: 10px;"><label style="background-color: green;padding:5px;">Solved</label></td>
+											<td><a href="" style="text-decoration: none;outline: none"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+										</tr>
+									</c:when>
+									</c:choose>
+								</c:forEach>
+						</table>
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
 </body>
 </html>

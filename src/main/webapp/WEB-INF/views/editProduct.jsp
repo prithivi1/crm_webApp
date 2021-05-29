@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>profile</title>
+	<title>products</title>
 	<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"/>
   	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   
@@ -14,7 +14,7 @@
 
 		body{
 			margin: 0;
-			padding: 0;
+			padding: 5px;
 			font-family: 'Raleway', sans-serif;
 		}
 
@@ -90,20 +90,35 @@
 			/*background-color: yellow;*/
 		}
 
-		.avatar-upload{
-			margin-left: 230px;
+		.area{
+			display: grid;
+			grid-template-columns: 3fr 2fr;
 		}
 
 		.form{
 			margin-left: 0%;
 			width: 100%;
 			height: 100%;
-			/*background-color: red;*/
+			/*background-color:green;*/
 
 		}
 
+		.fields{
+			margin-left: 40px;
+		}
+
 		.form input{
-			width: 50%;
+			width: 90%;
+		  	margin: 5px 0;
+		    border: 1px solid #1890ff;
+		    padding: 10px 15px;
+		    outline: none; 
+		    background: #f2f2f2;
+		    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+		}
+
+		.form textarea{
+			width: 90%;
 		  	margin: 5px 0;
 		    border: 1px solid #1890ff;
 		    padding: 10px 15px;
@@ -126,14 +141,20 @@
 	        margin-top: 20px;
 	        margin-left: 40px;
 	      }
+
+	    .avatar-preview{
+	    	margin: 30% 20%;
+	    }
 	      
-	      #op:hover{
-	      	margin-left: 10px;
-	      }
+	    #error{
+			color:red;
+		}
+		
+		#op:hover{
+			margin-left: 10px;
+		}
 
 	</style>
-	
-
 </head>
 <body>
 	<div class="main">
@@ -154,12 +175,12 @@
 		<div class="container">
 			<div class="header">
 				<div class="head" style="padding-left: 10px;">
-					<h4>MY PROFILE</h4>
+					<h4>PRODUCTS</h4>
 				</div>
 				<div style="float: right;" class="tray">	
 						<a href="/myApp/admin/home">home</a>
 						<a href="">notification</a>
-						<a href="">profile</a>
+						<a href="/myApp/admin/account">profile</a>
 						<a href="/myApp/logout">logout</a>
 					</ul>
 				</div>
@@ -169,89 +190,53 @@
 			<div class="split">
 				<div class="options">
 					<ul>
-						<li style="margin-left: 10px"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	Edit Profile</a></li>
-						<li id="op"><a href=""><i class="fa fa-bell" aria-hidden="true"></i> 	Notification</a></li>
-						<li id="op"><a href=""><i class="fa fa-shield" aria-hidden="true"></i> 	Password</a></li>
+						<li id="op"><a href="/myApp/admin/shop"><i class="fa fa-shopping-bag" aria-hidden="true"></i> 		Shop</a></li>
+						<li style="margin-left: 10px;"><a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> 		Add Products</a></li>
+						<li id="op"><a href="/myApp/admin/productList"><i class="fa fa-list" aria-hidden="true"></i> 	View products</a></li>
+						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	Edit Products</a></li>
 					</ul>
 				</div>
 
 				<div class="profile">
-					<h3 style="padding-left: 30px">Edit Profile</h3>
-	              <div class="form">
-		              <c:if test="${param.success!=null}">
-						<p style="color: green;margin-left:40px;">profile updated successfully</p>
-						<br>
-					</c:if>
-	              	<form:form action="myProfile" method="POST" modelAttribute="customer">
-	              		<div class="name" style="display: grid; grid-template-columns: 1fr 1fr;">
-	              			<div class="usernmae" style="margin-left: 40px;">
-	              				<label for="username">Username</label><br>
-	              				<form:input path="username" id="username" value="${customer.username }"/>
-	              			</div>
+					<h3 style="padding-left: 30px">EDIT PRODUCT</h3>
+					<div class="area">
+			              <div class="form">
+			              		<form:form action="/myApp/admin/editProduct" method="POST" modelAttribute="command" enctype="multipart/form-data">
+									<form:hidden name="productId" path="productId" value="${command.productId}"/>
+									<div class="fields">
+				              			<label for="name">NAME</label><br>
+				              			<input type="text" name="name" id="name" value="${command.name}">
+				              		</div>
+			              			<br>
+			              			<div class="fields">
+			              				<label for="cost">COST</label><br>
+				              			<input type="text" name="cost" id="cost" value="${command.cost}">
+			              			</div>
+			              			<br>
+			              			<div class="fields">
+				              			<label for="discription">DESCRIPTION</label><br>
+				              			<textarea name="discription" id="discription">${command.discription}</textarea>
+				              		</div>
+			              			<br>
+			              			<div class="fields">
+										<label for="picture">PICTURE</label><br>
+										<input type="file" name="picture" id="picture" value="${command.picture}"/>
+									</div>
+									<br>
 
-	              			<div class="companyName">
-	              				<label for="company">NAME</label><br>
-	              				<form:input path="companyName" id="company" value="${customer.companyName}"/>
-	              			</div>
-	              		</div>
-	              		<br>
-	              		<br>
-
-	              		<div class="name" style="display: grid; grid-template-columns: 1fr 1fr;
-	              				grid-column-gap: 20px;">
-	              			
-	              			<div class="usernmae" style="margin-left: 40px;">
-	              				<label for="email">EMAIL</label><br>
-	              				<form:input path="email" id="email" value="${customer.email}"/>
-	              			</div>
-
-	              			<div class="companyName">
-	              				<label for="contact">CONTACT</label><br>
-	              				<form:input path="mobile" id="contact" value="${customer.mobile }"/>
-	              			</div>
-	              		</div>
-						<br>
-						<br>
-						
-	              		<div class="name" style="display: grid; grid-template-columns: 1fr 1fr;
-	              				grid-column-gap: 20px;">
-	              			
-	              			<div class="usernmae" style="margin-left: 40px;">
-	              				<label for="address">ADDRESS</label><br>
-	              				<form:input path="address" id="address" value="${customer.address }"/>
-	              			</div>
-
-	              			<div class="companyName">
-	              				<label for="city">CITY</label><br>
-	              				<form:input path="city" id="city" value="${customer.city }"/>
-	              			</div>
-	              		</div>
-						<br>
-						<br>
-						
-						<div class="name" style="display: grid; grid-template-columns: 1fr 1fr;
-	              				grid-column-gap: 20px;">
-	              			
-	              			<div class="usernmae" style="margin-left: 40px;">
-	              				<label for="state">STATE</label><br>
-	              				<form:input path="state" id="state" value="${customer.state }"/>
-	              			</div>
-
-	              			<div class="companyName">
-	              				<label for="website">WEBSITE</label><br>
-	              				<form:input path="website" id="website" value="${customer.website}"/>
-	              			</div>
-	              		</div>
-
-	              		<button class="button">UPDATE</button><br><br>
-	              	</form:form>
-	              </div>
-
+						            <button class="button">SAVE</button><br><br><br>
+			              		</form:form>
+			              </div>
+			              <div class="picture">
+			              		<div class="avatar-preview">
+						        </div>
+			              </div>
+			       	</div>
 				</div>
 			</div>
 		</div>
 
 	</div>
-	
+
 </body>
 </html>

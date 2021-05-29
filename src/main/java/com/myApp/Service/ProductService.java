@@ -13,4 +13,8 @@ public interface ProductService {
 	public List<ProductDTO> getAllProducts();
 	
 	public Blob getPhotoByName(String name);
+	
+	public ProductDTO getProductById(long id);
+
+	public void updateProductDetails(ProductDTO product);
 }

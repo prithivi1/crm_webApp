@@ -24,7 +24,7 @@ public class ProductDAOImpl implements ProductDAO {
 	public void addNewProduct(ProductEntity product) {
 		sessionFactory.getCurrentSession().saveOrUpdate(product);
 	}
-
+	
 	@Transactional
 	public List<ProductEntity> getAllProducts() {
 		return sessionFactory.getCurrentSession().createQuery("from ProductEntity").list();
@@ -37,5 +37,10 @@ public class ProductDAOImpl implements ProductDAO {
 		Blob obj = list.getPicture();
 		return obj;
 	}
-
+	
+	@Transactional
+	public void updateProduct(ProductEntity product)
+	{
+		sessionFactory.getCurrentSession().update(product);
+	}
 }

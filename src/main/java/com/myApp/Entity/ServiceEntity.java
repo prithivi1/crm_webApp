@@ -13,12 +13,26 @@ public class ServiceEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long serviceId;
+	private String date;
 	private String customerName;
 	private String customerEmail;
 	private String item;
 	private String description;
+	private String action;
 	private boolean status;
 	
+	public String getDate() {
+		return date;
+	}
+	public String getAction() {
+		return action;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public void setAction(String action) {
+		this.action = action;
+	}
 	public long getServiceId() {
 		return serviceId;
 	}

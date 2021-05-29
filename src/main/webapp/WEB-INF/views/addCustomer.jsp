@@ -143,14 +143,13 @@
 	<div class="main">
 		<div class="navbar">
 			
-			
 			<br>
 			<ul>
 				<li id="op"><a href="/myApp/admin/Customers"><i class="fa fa-users" aria-hidden="true"></i> customers</a></li>
 				<li id="op"><a href="/myApp/admin/addProduct"><i class="fa fa-shopping-cart" aria-hidden="true"></i> products</a></li>
 				<li id="op"><a href=""><i class="fa fa-paper-plane" aria-hidden="true"></i> service</a></li>
-				<li id="op"><a href=""><i class="fa fa-exclamation-circle" aria-hidden="true"></i> tickets</a></li>
-				<li id="op"><a href=""><i class="fa fa-tasks" aria-hidden="true"></i> invoices</a></li>
+				<li id="op"><a href="/myApp/admin/ticketsPending"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> tickets</a></li>
+				<li id="op"><a href="/myApp/admin/invoices"><i class="fa fa-tasks" aria-hidden="true"></i> invoices</a></li>
 			</ul>
 		</div>
 

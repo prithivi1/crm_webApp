@@ -2,6 +2,10 @@ package com.myApp.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -43,17 +47,28 @@ public class CustomerController {
 	
 	
 	@RequestMapping("/home")
-	public String getCustomerHomePage(Model model)
+	public String getCustomerHomePage(Model model,HttpSession session,Authentication authentication,HttpServletResponse response)
 	{
+//		setCookie(response);
+		response.addCookie(myCookie);
+		String user = authentication.getName().toString();
+		session.setAttribute("username",user);
 		List<ProductDTO> product = productService.getAllProducts();
 		model.addAttribute("product", product);
 		return "customerHome";
 	}	
 	
+//	private void setCookie(HttpServletResponse response)
+//	{
+		Cookie myCookie = new Cookie("myApp.username", "prithivi");
+//		myCookie.setMaxAge(60*60*24);
+//		response.addCookie(myCookie);
+//	}
+	
 	@RequestMapping("/myProduct")
-	public String getProductPage(Authentication authentication,Model model)
+	public String getProductPage(Model model,HttpSession session)
 	{
-		String user = authentication.getName().toString();
+		String user = session.getAttribute("username").toString();
 		List<ProductEntity> list = purchaseService.getAllUserProducts(user);
 		model.addAttribute("product", list);
 		return "customerProduct";
@@ -112,6 +127,13 @@ public class CustomerController {
 		List<ServiceEntity> list = ticketService.getAllServiceByUser(user);
 		model.addAttribute("ticket", list);
 		return "pendingRequest";
+	}
+	
+	@GetMapping("/editService/{id}")
+	public String deletePendingRequest(@PathVariable("id") long serviceId)
+	{
+		ticketService.deleteTicketById(1);
+		return "redirect:/customer/pending?success";
 	}
 	
 	@GetMapping("/resolved")

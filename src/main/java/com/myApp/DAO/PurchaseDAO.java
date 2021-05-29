@@ -22,4 +22,5 @@ public interface PurchaseDAO {
 	public InvoiceEntity getInvoiceById(long id);
 	
 	public List<InvoiceEntity> getAllInvoices();
+
 }

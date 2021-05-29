@@ -165,10 +165,10 @@
 			
 			<ul>
 				<li id="op"><a href="/myApp/admin/Customers"><i class="fa fa-users" aria-hidden="true"></i> customers</a></li>
-				<li id="op"><a href=""><i class="fa fa-shopping-cart" aria-hidden="true"></i> products</a></li>
-				<li id="op"><a href=""><i class="fa fa-paper-plane" aria-hidden="true"></i> service</a></li>
-				<li id="op"><a href=""><i class="fa fa-exclamation-circle" aria-hidden="true"></i> tickets</a></li>
-				<li id="op"><a href=""><i class="fa fa-tasks" aria-hidden="true"></i> invoices</a></li>
+				<li id="op"><a href="/myApp/admin/addProduct"><i class="fa fa-shopping-cart" aria-hidden="true"></i> products</a></li>
+				<li id="op"><a href="/myApp/admin/ticketsPending"><i class="fa fa-paper-plane" aria-hidden="true"></i> tickets</a></li>
+				<li id="op"><a href=""><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Teams</a></li>
+				<li id="op"><a href="/myApp/admin/invoices"><i class="fa fa-tasks" aria-hidden="true"></i> invoices</a></li>
 			</ul>
 		</div>
 
@@ -191,8 +191,8 @@
 				<div class="options">
 					<ul>
 						<li id="op"><a href="/myApp/admin/shop"><i class="fa fa-shopping-bag" aria-hidden="true"></i> 		Shop</a></li>
-						<li style="margin-left: 10px;"><a href="@"><i class="fa fa-cart-plus" aria-hidden="true"></i> 		Add Products</a></li>
-						<li id="op"><a href="/myApp/admin/Customers"><i class="fa fa-list" aria-hidden="true"></i> 	View products</a></li>
+						<li style="margin-left: 10px;"><a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> 		Add Products</a></li>
+						<li id="op"><a href="/myApp/admin/productList"><i class="fa fa-list" aria-hidden="true"></i> 	View products</a></li>
 						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	Edit Products</a></li>
 					</ul>
 				</div>
@@ -202,7 +202,7 @@
 					<div class="area">
 			              <div class="form">
 			              		<form:form action="saveProduct" method="POST" modelAttribute="command" enctype="multipart/form-data">
-									
+									<form:hidden path="productId"/>
 									<div class="fields">
 				              			<label for="name">NAME</label><br>
 				              			<input type="text" name="name" id="name">

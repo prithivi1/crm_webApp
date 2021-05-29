@@ -174,7 +174,7 @@
 				<div class="profile">
 					<h3 style="padding-left: 30px">Edit Profile</h3>
 	              <div class="form">
-		              <c:if test="${param.success!=null}">
+		            <c:if test="${param.success!=null}">
 						<p style="color: green;margin-left:40px;">profile updated successfully</p>
 						<br>
 					</c:if>
@@ -186,7 +186,7 @@
 	              			</div>
 
 	              			<div class="companyName">
-	              				<label for="company">COMPANY NAME</label><br>
+	              				<label for="company">NAME</label><br>
 	              				<form:input path="companyName" id="company" value="${customer.companyName}"/>
 	              			</div>
 	              		</div>

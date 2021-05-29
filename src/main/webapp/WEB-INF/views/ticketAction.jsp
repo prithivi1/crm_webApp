@@ -1,12 +1,11 @@
-<%@page import="java.util.List"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>service</title>
 	<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"/>
   	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -98,6 +97,7 @@
 			.profile{
 
 				height: 55ch;
+				overflow: scroll;
 			}
 
 			.divide{
@@ -228,12 +228,13 @@
 			<h4 align="center" style="color: white">WELCOME</h4>
 			<i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 90px;color: white;margin-left: 25px;"></i>
 			
-			
+
 			<ul>
-				<li id="op"><a href="/myApp/customer/home"><i class="fa fa-shopping-bag" aria-hidden="true"></i> shop</a></li>
-				<li id="op"><a href="/myApp/customer/myProduct"><i class="fa fa-shopping-cart" aria-hidden="true"></i> my products</a></li>
-				<li id="op"><a href="/myApp/customer/service"><i class="fa fa-paper-plane" aria-hidden="true"></i> service</a></li>
-				<li id="op"><a href="/myApp/customer/invoice"><i class="fa fa-tasks" aria-hidden="true"></i> invoices</a></li>
+				<li id="op"><a href="/myApp/admin/Customers"><i class="fa fa-users" aria-hidden="true"></i> customers</a></li>
+				<li id="op"><a href="/myApp/admin/addProduct"><i class="fa fa-shopping-cart" aria-hidden="true"></i> products</a></li>
+				<li id="op"><a href="/myApp/admin/ticketsPending"><i class="fa fa-paper-plane" aria-hidden="true"></i> tickets</a></li>
+				<li id="op"><a href=""><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Teams</a></li>
+				<li id="op"><a href="/myApp/admin/invoices"><i class="fa fa-tasks" aria-hidden="true"></i> invoices</a></li>
 			</ul>
 		</div>
 
@@ -243,9 +244,9 @@
 					<h4>SERVICE</h4>
 				</div>
 				<div style="float: right;" class="tray">	
-						<a href="/myApp/customer/home">home</a>
+						<a href="/myApp/admin/home">home</a>
 						<a href="">notification</a>
-						<a href="/myApp/customer/account">profile</a>
+						<a href="/myApp/admin/account">profile</a>
 						<a href="/myApp/logout">logout</a>
 					</ul>
 				</div>
@@ -255,49 +256,103 @@
 			<div class="split">
 				<div class="options">
 					<ul>
-						<li id="op"><a href="/myApp/customer/service"><i class="fa fa-bars" aria-hidden="true"></i> 		Request Service</a></li>
-						<li id="op"><a href="/myApp/customer/pending"><i class="fa fa-ticket" aria-hidden="true"></i>	Pending Tickets</a></li>
-						<li id="op"><a href="/myApp/customer/resolved"><i class="fa fa-check" aria-hidden="true"></i> 	Resolved Tickets</a></li>
-						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	General Tickets</a></li>
+						<li id="op"><a href="/myApp/admin/ticketsPending"><i class="fa fa-ticket" aria-hidden="true"></i>	Pending Tickets</a></li>
+						<li id="op"><a href="/myApp/admin/ticketsResolved"><i class="fa fa-check" aria-hidden="true"></i> 	Resolved Tickets</a></li>
+						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	Assign Work</a></li>
+						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	Create Team</a></li>
+						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	View Work</a></li>
 
 					</ul>
 				</div>
 
 				<div class="profile">
-					<h3 style="padding-left: 30px">PENDING TICKETS</h3>
+					<h3 style="padding-left: 30px">ACTION</h3>
 					<div class="form">
-						<table border="1">
-							<tr>
-								<th>TICKET ID</th>
-								<th>DATE</th>
-								<th>USERNAME</th>
-								<th>PRODUCT</th>
-								<td>DESCRIPTION</td>
-								<th>STATUS</th>
-								<th>DELETE</th>
-							</tr>
-							<tr>
-								<c:forEach var="ticket" items="${ticket}">
-									<c:choose>
-									<c:when test="${ticket.status==false}">  
-										<tr>
-											<td>${ticket.serviceId }</td>
-											<td>${ticket.date}</td>
-											<td>${ticket.customerName}</td>
-											<td>${ticket.item}</td>
-											<td>${ticket.description}</td>
-											<td style="padding: 10px;"><label style="background-color: orange;padding:5px;">In Progress</label></td>
-											<td><a href="/myApp/customer/editService/${ticket.serviceId}" style="text-decoration: none;outline: none"><i class="fa fa-pencil" aria-hidden="true" style="margin-bottom: 5px;"></i></a></td>
-										</tr>
-									</c:when>
-									</c:choose>
-								</c:forEach>
-						</table>
+						<c:if test="${param.success!=null}">
+						<p style="color: green;margin-left:40px;">profile updated successfully</p>
+						<br>
+					</c:if>
+	              	<form:form action="profile" method="POST" modelAttribute="ticket">
+	              		<form:hidden path="serviceId" value="${ticket.serviceId }"/>
+	              		
+	              		<div class="name" style="display: grid; grid-template-columns: 1fr 1fr;">
+	              			<div class="usernmae" style="margin-left: 40px;">
+	              				<label for="username">Username</label><br>
+	              				<form:input path="customerName" id="username" value="${ticket.customerName}"/>
+	              			</div>
+
+	              			<div class="companyName">
+	              				<label for="company">Date</label><br>
+	              				<form:input path="date" id="company" value="${ticket.date}"/>
+	              			</div>
+	              		</div>
+	              		<br>
+	              		<br>
+
+	              		<div class="name" style="display: grid; grid-template-columns: 1fr 1fr;
+	              				grid-column-gap: 20px;">
+	              			
+	              			<div class="usernmae" style="margin-left: 40px;">
+	              				<label for="email">e-mail</label><br>
+	              				<form:input path="customerEmail" id="email" value="${ticket.customerEmail}"/>
+	              			</div>
+
+	              			<div class="companyName">
+	              				<label for="contact">Item</label><br>
+	              				<form:input path="item" id="contact" value="${ticket.item}"/>
+	              			</div>
+	              		</div>
+						<br>
+						<br>
+						
+	              		<div class="name" style="display: grid; grid-template-columns: 1fr 1fr;
+	              				grid-column-gap: 20px;">
+	              			
+	              			<div class="field" style="margin-left: 40px;">
+	              				<label for="address">Description</label><br>
+	              				<form:textarea path="description" rows="6" value="${ticket.description}"/>
+	              			</div>
+	              			
+	              			<div class="field">
+	              				<label for="website">Action</label><br>
+	              				<form:textarea path="action" id="website" rows="6"/>
+	              			</div>
+	              		</div>
+						<br>
+						<br>
+						
+						<div class="name" style="display: grid; grid-template-columns: 1fr 1fr;
+	              				grid-column-gap: 20px;">
+	              			
+	              			<div class="usernmae" style="margin-left: 40px;">
+	              				<label for="state">Assign Team</label><br>
+	              				<form:select path="item">
+	              					<form:option value="car" label="car"/>
+	              				</form:select>  
+	              			</div>
+	              			
+	              			<div class="name" style="display: grid; grid-template-columns: 1fr 1fr;
+	              				grid-column-gap: 20px;">
+	              			
+		              			<div class="usernmae">
+		              				<button class="button">UPDATE</button><br><br>
+		              			</div>
+	
+		              			<div class="companyName">
+		              				<button class="button" style="background-color: red">END</button><br><br>
+		              			</div>
+		              		</div>
+
+	              		</div>
+						<br>
+						
+	              		
+	              	</form:form>
+						
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
 </body>
 </html>

@@ -1,41 +1,33 @@
 package com.myApp.controllers;
 
-import java.util.List;
+import java.util.List; 
 
-import javax.servlet.ServletContext;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.codec.multipart.Part;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.myApp.DTO.CustomerProfileDTO;
 import com.myApp.DTO.CustomerRegisterDTO;
 import com.myApp.DTO.ProductDTO;
-import com.myApp.Entity.CustomerEntity;
 import com.myApp.Entity.InvoiceEntity;
+import com.myApp.Entity.ServiceEntity;
 import com.myApp.Service.CustomerService;
 import com.myApp.Service.ProductService;
 import com.myApp.Service.PurchaseService;
+import com.myApp.Service.TicketService;
 
 @Controller
 @RequestMapping("/admin")
@@ -49,6 +41,9 @@ public class AdminController {
 	
 	@Autowired
 	private PurchaseService purchaseService;
+	
+	@Autowired
+	private TicketService ticketService;
 	
 	@RequestMapping("/home")
 	public String getAdminUrl()
@@ -165,6 +160,63 @@ public class AdminController {
 		model.addAttribute("invoice", invoice);
 		return "adminInvoice";
 	}
+	
+	@GetMapping("/productList")
+	public String getAllProducts(Model model)
+	{
+		List<ProductDTO> list = productService.getAllProducts();
+		model.addAttribute("product", list);
+		return "adminProductList";
+	}
+	
+	@GetMapping("/editProduct/{id}")
+	public String editProduct(@PathVariable("id") long id,Model model)
+	{
+		ProductDTO product = productService.getProductById(id);
+		model.addAttribute("command", product);
+		return "editProduct";
+	}
+	
+	@PostMapping("/editProduct")
+	public String updateProduct(@RequestParam("productId") long productId,@RequestParam("name") String name,@RequestParam("cost") float cost, @RequestParam("discription") String discription,@RequestParam("picture") MultipartFile file)
+	{
+		ProductDTO product = new ProductDTO(name,cost,discription,null);
+		product.setProductId(productId);
+		try{
+			product.setPicture(file.getBytes());
+		}catch (Exception e) {
+			System.out.println("error in update profile "+e.getMessage());
+		}
+		
+		productService.updateProductDetails(product);
+		return "redirect:/admin/productList";
+	}
+	
+	@GetMapping("/ticketsPending")
+	public String getServicePage(Model model)
+	{
+		List<ServiceEntity> list = ticketService.getAllService();
+		model.addAttribute("ticket", list);
+		return "adminService";
+	}
+	
+	@GetMapping("/ticketsResolved")
+	public String getResolvedTicketsPage(Model model)
+	{
+		List<ServiceEntity> list = ticketService.getAllService();
+		model.addAttribute("ticket", list);
+		return "adminResolvedTickets";
+	}
+	
+	
+	@GetMapping("/takeAction/{id}")
+	public String getActionPage(@PathVariable long id,Model model)
+	{
+		ServiceEntity service = ticketService.getServiceById(id);
+		model.addAttribute("ticket", service);
+		return "ticketAction";
+	}
+	
 }  
 	
 	

@@ -1,31 +1,24 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@page import="java.util.List"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>products</title>
+	<title>customer support</title>
 	<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"/>
-  	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    
 	<style type="text/css">
-
+		
 		body{
 			margin: 0;
 			padding: 5px;
 			font-family: 'Raleway', sans-serif;
 		}
-		
-		::-webkit-scrollbar {
-	            width: 0px;  /* Remove scrollbar space */
-	            background: transparent;  /* Optional: just make scrollbar invisible */
-		    }
-		    
-		    ::-webkit-scrollbar-thumb {
-		        background: transparent;
-		    }
 
 		.main{
 			display: grid;
@@ -36,6 +29,7 @@
 		.navbar{
 			background-color: blue;
 			height: 100%;
+			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px
 		}
 
 		.navbar li{
@@ -95,63 +89,68 @@
 
 
 		.profile{
-			width: 100%;
+			width: 90%;
 			height: 55ch;
-			overflow:scroll;
 			/*background-color: yellow;*/
 		}
+	  
+	  table {
+          border-collapse: collapse;
+          width: 100%;
+          margin-left:20px;
+          font-family: 'arial', sans-serif;
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
 
-		.area{
-			width: 100%;
-			display: grid;
-			grid-template-columns: 2.5fr 2.5fr 2.5fr;
-			grid-column-gap: 20px;
-			grid-row-gap: 20px;
-			padding: 0px;
+        th {
+          text-align: center;
+          padding: 8px;
+          height: 20px;
+		  font-family: 'Raleway', sans-serif;
+        }
+        
+        td{
+        	padding-left:2px;
+        	padding-top:20px;
+        	text-align: center;
+        }
+
+        tr {
+          background-color: transparent;
+          color:black;
+        }
+        
+        .view-table a{
+        	outline: black solid 1px;
+        	padding:5px;
+        	color:black;
+        }
+    
+		.reg-form{
+			margin-top:-80px;
+			padding: 50px;
 		}
 
-
-		.item{
-			margin-left: 10px;
-			outline: 0.5px solid black;
-			padding: 10px;
-			text-align: center;
-			line-height: 5px;
-			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-		}
-
-		.item:hover{
-			background-color: #f2f2f2;
-		}
-
-		.button {
-	        background-color: blue;
-	        border: none;
-	        color: white;
-	        padding: 15px 32px;
-	        text-align: center;
-	        text-decoration: none;
-	        display: inline-block;
-	        font-size: 16px;
-	        margin: 4px 20px;
-	        cursor: pointer;
-	      }
-
-	    .avatar-preview{
-	    	margin: 30% 20%;
-	    }
-	      
-	    #error{
-			color:red;
+		.reg-form input{
+		  	margin: 5px 0;
+			border:none;
+		    border-bottom: 1px solid #1890ff;
+		    padding: 10px 15px;
+		    outline: none; 
+		    background: transparent;
 		}
 		
 		#op:hover{
 			margin-left: 10px;
 		}
-
+		
+		
 	</style>
+	
 </head>
 <body>
+	
+	
 	<div class="main">
 		<div class="navbar">
 			
@@ -185,33 +184,45 @@
 			<div class="split">
 				<div class="options">
 					<ul>
-						<li style="margin-left: 10px;"><a href="@"><i class="fa fa-shopping-bag" aria-hidden="true"></i> 		Shop</a></li>
-						<li id="op"><a href="/myApp/admin/addProduct"><i class="fa fa-user-plus" aria-hidden="true"></i> 		Add Products</a></li>
-						<li id="op"><a href=""><i class="fa fa-users" aria-hidden="true"></i> 	View products</a></li>
+						<li id="op"><a href="/myApp/admin/shop"><i class="fa fa-shopping-bag" aria-hidden="true"></i> 		Shop</a></li>
+						<li id="op"><a href="@"><i class="fa fa-cart-plus" aria-hidden="true"></i> 		Add Products</a></li>
+						<li id="op"><a href="#"><i class="fa fa-list" aria-hidden="true"></i> 	View products</a></li>
 						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	Edit Products</a></li>
 					</ul>
 				</div>
 
 				<div class="profile">
-					<h3 style="padding-left: 30px">Shop</h3>
-					<div class="area">
-						<c:forEach var="i" items="${product}">
-							<div class="item">
-								<img src="/myApp/getPhoto/<c:out value='${i.name}'/>" alt="image" width="100" height="100">
-								<h3>${i.name}</h3>
-								<h4>${i.cost}</h4>
-								<p style="line-height: 15px;">${i.discription}</p>
-								<form action="">
-									<button class="button"> BUY</button>
-								</form>
-							</div>
-						</c:forEach>
-					</div>
+					<h3 style="padding-left: 30px">ITEMS</h3>
+						<div class="view-table">
+							<c:set var="size" scope="session" value="${fn:length(product)}"/> 
+							<c:choose>
+							<c:when test="${size>0}">  
+								<table border="1">
+									<tr>
+										<th>ID</th>
+										<th>NAME</th>
+										<th>COST</th>
+										<th>DESCRIPTION</th>
+										<th>EDIT</th>
+									</tr>
+									<c:forEach var="product" items="${product}">
+										<tr>
+											<td>${product.productId}</td>
+											<td>${product.name}</td>
+											<td>${product.cost}</td>
+											<td>${product.discription}</td>
+											<td><a href="/myApp/admin/editProduct/${product.productId}" style="text-decoration: none;outline: none"><i class="fa fa-pencil" aria-hidden="true" style="margin-bottom: 5px;"></i></a></td>
+										</tr>
+									</c:forEach>
+								</table>
+							</c:when>
+						</c:choose>
+					</div>	
 				</div>
 			</div>
 		</div>
-
 	</div>
+	
 	
 	
 </body>

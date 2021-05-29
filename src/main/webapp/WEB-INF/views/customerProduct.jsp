@@ -35,7 +35,7 @@
 
 			.navbar{
 				background-color: blue;
-				height: 62ch;
+				height: 61.5ch;
 			}
 
 			.navbar li{
@@ -77,7 +77,7 @@
 
 			.options{
 				background-color: grey;
-				height: 55ch;
+				height: 54ch;
 			}
 
 			.options li{
@@ -95,7 +95,6 @@
 			}
 
 			.profile{
-
 				height: 55ch;
 				overflow-x: scroll;
 				/*background-color: yellow;*/
@@ -153,8 +152,9 @@
 <body>
 	<div class="main">
 		<div class="navbar">
-			
-			<i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 100px;color: white;margin-left: 25px;"></i>
+			<br>
+			<h4 align="center" style="color: white">WELCOME</h4>
+			<i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 90px;color: white;margin-left: 25px;"></i>
 
 			<ul>
 				<li id="op"><a href="/myApp/customer/home"><i class="fa fa-shopping-bag" aria-hidden="true"></i> shop</a></li>
@@ -167,7 +167,7 @@
 		<div class="container">
 			<div class="header">
 				<div class="head" style="padding-left: 10px;">
-					<h4>WELCOME PRITHIVI</h4>
+					<h4>PRODUCTS</h4>
 				</div>
 				<div style="float: right;" class="tray">	
 						<a href="/myApp/customer/home">home</a>
@@ -182,12 +182,13 @@
 			<div class="split">
 				<div class="options">
 					<ul>
-						<li id="op"><a href="@"><i class="fa fa-bars" aria-hidden="true"></i> 		my Products</a></li>
+						<li id="op"><a href=""><i class="fa fa-bars" aria-hidden="true"></i> 		my Products</a></li>
+						<li id="op"><a href=""><i class="fa fa-pencil" aria-hidden="true"></i> 	my Cart</a></li>
 					</ul>
 				</div>
 
 				<div class="profile">
-					<h3 style="padding-left: 30px">Shop</h3>
+					<h3 style="padding-left: 30px">My Products</h3>
 					<div class="area">
 						<c:forEach var="i" items="${product}">
 							

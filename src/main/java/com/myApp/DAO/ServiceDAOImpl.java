@@ -30,4 +30,23 @@ public class ServiceDAOImpl implements ServiceDAO {
 		return list;
 	}
 
+	@Transactional
+	public void deleteTicketById(long id) {
+		String hql = "Delete from ServiceEntity where serviceId = '"+id+"'";
+		sessionFactory.getCurrentSession().createQuery(hql).executeUpdate();		
+	}
+
+	@Transactional
+	public List<ServiceEntity> getAllTickets() {
+		String hql = "from ServiceEntity";
+		List<ServiceEntity> list = (List<ServiceEntity>) sessionFactory.getCurrentSession().createQuery(hql).list();		
+		return list;
+	}
+
+	@Transactional
+	public ServiceEntity getServiceById(long id) {
+		String hql = "from ServiceEntity where serviceId = '"+id+"'";
+		return (ServiceEntity) sessionFactory.getCurrentSession().createQuery(hql).list().get(0);
+	}
+
 }
